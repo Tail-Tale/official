@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja" style="color-scheme: light only;">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light">
+  <title>NEWS | ている×ている</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Noto+Serif+JP:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/news.css">
+</head>
+<body>
+
+  <!-- ナビゲーション -->
+  <header class="site-nav">
+    <a href="index.html" class="nav-logo">
+      <img src="images/logo.png" alt="ている×ている" class="nav-logo-img">
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html#sec-works">WORKS</a></li>
+      <li><a href="index.html#sec-about">ABOUT</a></li>
+      <li><a href="news.html">NEWS</a></li>
+      <li><a href="index.html#sec-contact">CONTACT</a></li>
+    </ul>
+  </header>
+
+  <!-- ヒーロー -->
+  <div class="hero">
+    <div class="hero-stars">
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
+    <div class="hero-label">
+      <div class="hero-label-sub">お知らせ</div>
+      <h1>N E W S</h1>
+    </div>
+  </div>
+
+  <!-- メイン -->
+  <main class="news-list-page">
+
+    <!-- フィルタ -->
+    <div class="news-filter">
+      <button class="filter-btn active" data-tag="all">すべて</button>
+      <button class="filter-btn" data-tag="event">イベント</button>
+      <button class="filter-btn" data-tag="release">新刊</button>
+      <button class="filter-btn" data-tag="info">お知らせ</button>
+    </div>
+
+    <!-- ニュースカード一覧（news.jsが動的に挿入） -->
+    <div id="news-card-list"></div>
+
+  </main>
+
+  <footer>
+    &copy; 2025 ている×ている. All rights reserved.
+  </footer>
+
+  <script src="js/news.js"></script>
+</body>
+</html>

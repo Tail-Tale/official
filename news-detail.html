@@ -7,395 +7,20 @@
   <title>NEWS | ている×ている</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Noto+Serif+JP:wght@300;400;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      color-scheme: light only;
-      --bg: #fdf8f5;
-      --text-main: #2a1f1a;
-      --text-sub: #7a6560;
-      --accent-pink: #e8829a;
-      --tag-event-bg: #fce8ee;
-      --tag-event-text: #d4607a;
-      --tag-news-bg: #e8f0fd;
-      --tag-news-text: #5b7fc4;
-      --tag-release-bg: #fef3d8;
-      --tag-release-text: #c48a2a;
-      --border: #ecddd7;
-    }
-
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    html, body {
-      background-color: #fdf8f5 !important;
-      color: #2a1f1a !important;
-    }
-
-    body {
-      font-family: 'Noto Serif JP', serif;
-      min-height: 100vh;
-    }
-
-    /* ダークモード強制上書き */
-    @media (prefers-color-scheme: dark) {
-      html, body { background-color: #fdf8f5 !important; color: #2a1f1a !important; }
-      .site-nav  { background-color: rgba(253,248,245,0.96) !important; }
-      .hero      { background: linear-gradient(135deg, #f5d5df 0%, #dde6f7 50%, #fae8d0 100%) !important; }
-      .post-nav-item, .info-box { background-color: #ffffff !important; }
-      footer     { background-color: #fdf8f5 !important; }
-      * { color: inherit !important; }
-    }
-
-    /* ===== NAV ===== */
-    .site-nav {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      z-index: 100;
-      background-color: rgba(253, 248, 245, 0.95) !important;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border-bottom: 1px solid #ecddd7;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 1.5rem 0 0.5rem;
-      height: 64px;
-    }
-
-    .nav-logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1rem;
-      letter-spacing: 0.08em;
-      color: #2a1f1a;
-      text-decoration: none;
-    }
-
-    .nav-logo:hover { color: #e8829a; }
-
-    .nav-links {
-      list-style: none;
-      display: flex;
-      gap: 1.5rem;
-    }
-
-    .nav-links a {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 0.82rem;
-      letter-spacing: 0.15em;
-      color: #7a6560;
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    .nav-links a:hover { color: #e8829a; }
-
-    /* ===== HERO ===== */
-    .hero {
-      margin-top: 64px;
-      height: 160px;
-      background: linear-gradient(135deg, #f5d5df 0%, #dde6f7 50%, #fae8d0 100%) !important;
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      align-items: flex-end;
-      padding: 0 1.5rem 1.5rem;
-    }
-
-    .hero-stars span {
-      position: absolute;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.8);
-      animation: twinkle 3s ease-in-out infinite;
-    }
-    .hero-stars span:nth-child(1){width:3px;height:3px;top:20%;left:10%;animation-delay:0s}
-    .hero-stars span:nth-child(2){width:2px;height:2px;top:40%;left:28%;animation-delay:.5s}
-    .hero-stars span:nth-child(3){width:4px;height:4px;top:15%;left:62%;animation-delay:1s}
-    .hero-stars span:nth-child(4){width:2px;height:2px;top:60%;left:80%;animation-delay:1.5s}
-    .hero-stars span:nth-child(5){width:3px;height:3px;top:30%;left:90%;animation-delay:.8s}
-
-    @keyframes twinkle {
-      0%,100%{opacity:.3;transform:scale(1)}
-      50%{opacity:1;transform:scale(1.5)}
-    }
-
-    .hero-label { position: relative; z-index: 1; }
-
-    .hero-label-sub {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 0.72rem;
-      letter-spacing: 0.2em;
-      color: #e8829a;
-      margin-bottom: 0.3rem;
-    }
-
-    .hero-label h1 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 2.6rem;
-      font-weight: 300;
-      letter-spacing: 0.25em;
-      color: #2a1f1a;
-    }
-
-    /* ===== CONTAINER ===== */
-    .container {
-      max-width: 680px;
-      margin: 0 auto;
-      padding: 2.5rem 1.5rem 6rem;
-    }
-
-    /* ===== BREADCRUMB ===== */
-    .breadcrumb {
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      font-size: 0.72rem;
-      letter-spacing: 0.08em;
-      color: #7a6560;
-      margin-bottom: 2rem;
-      flex-wrap: wrap;
-      animation: fadeUp 0.5s ease both;
-    }
-
-    .breadcrumb a {
-      color: #7a6560;
-      text-decoration: none;
-    }
-
-    .breadcrumb a:hover { color: #e8829a; }
-
-    /* ===== ARTICLE ===== */
-    .article { animation: fadeUp 0.6s ease 0.1s both; }
-
-    .article-meta {
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      margin-bottom: 1rem;
-    }
-
-    .article-date {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 0.88rem;
-      letter-spacing: 0.12em;
-      color: #7a6560;
-    }
-
-    .tag {
-      display: inline-block;
-      padding: 0.18rem 0.8rem;
-      border-radius: 99px;
-      font-size: 0.72rem;
-      letter-spacing: 0.05em;
-    }
-
-    .tag-event   { background-color: #fce8ee; color: #d4607a; }
-    .tag-news    { background-color: #e8f0fd; color: #5b7fc4; }
-    .tag-release { background-color: #fef3d8; color: #c48a2a; }
-
-    .article-title {
-      font-size: 1.4rem;
-      font-weight: 700;
-      line-height: 1.7;
-      letter-spacing: 0.04em;
-      color: #2a1f1a;
-      margin-bottom: 1.8rem;
-    }
-
-    .article-divider {
-      width: 100%;
-      height: 1px;
-      background: linear-gradient(to right, #e8829a, transparent);
-      margin-bottom: 1.8rem;
-    }
-
-    .article-body {
-      line-height: 2;
-      font-size: 0.93rem;
-      letter-spacing: 0.04em;
-      color: #2a1f1a;
-    }
-
-    .article-body p + p { margin-top: 1.2em; }
-
-    /* ===== INFO BOX ===== */
-    .info-box {
-      margin: 1.8rem 0;
-      border: 1px solid #ecddd7;
-      border-radius: 12px;
-      overflow: hidden;
-      background-color: #ffffff;
-    }
-
-    .info-box-header {
-      background: linear-gradient(135deg, #fce8ee, #fff5f8);
-      padding: 0.7rem 1.2rem;
-      font-size: 0.75rem;
-      letter-spacing: 0.15em;
-      color: #d4607a;
-      font-family: 'Cormorant Garamond', serif;
-      border-bottom: 1px solid #ecddd7;
-    }
-
-    .info-box-body { padding: 0.4rem 1.2rem; }
-
-    .info-row {
-      display: grid;
-      grid-template-columns: 5.5em 1fr;
-      gap: 0 1rem;
-      padding: 0.65rem 0;
-      border-bottom: 1px solid #f5ede9;
-    }
-
-    .info-row:last-child { border-bottom: none; }
-
-    .info-label {
-      font-size: 0.75rem;
-      letter-spacing: 0.08em;
-      color: #7a6560;
-      padding-top: 0.1em;
-    }
-
-    .info-value {
-      font-size: 0.88rem;
-      color: #2a1f1a;
-    }
-
-    /* ===== SHARE ===== */
-    .share-section {
-      margin-top: 2.5rem;
-      padding-top: 1.8rem;
-      border-top: 1px solid #ecddd7;
-    }
-
-    .share-label {
-      font-size: 0.7rem;
-      letter-spacing: 0.2em;
-      color: #7a6560;
-      font-family: 'Cormorant Garamond', serif;
-      margin-bottom: 0.8rem;
-    }
-
-    .share-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.55rem 1.2rem;
-      background-color: #1a1a2e;
-      color: #ffffff;
-      border-radius: 99px;
-      font-size: 0.76rem;
-      letter-spacing: 0.08em;
-      text-decoration: none;
-      transition: opacity 0.2s;
-    }
-
-    .share-btn:hover { opacity: 0.75; }
-
-    /* ===== POST NAV ===== */
-    .post-nav {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.8rem;
-      margin-top: 3rem;
-      animation: fadeUp 0.6s ease 0.2s both;
-    }
-
-    .post-nav-item {
-      display: flex;
-      flex-direction: column;
-      padding: 1rem;
-      border: 1px solid #ecddd7;
-      border-radius: 12px;
-      text-decoration: none;
-      background-color: #ffffff;
-      transition: all 0.2s;
-      gap: 0.4rem;
-    }
-
-    .post-nav-item:hover {
-      border-color: #e8829a;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 16px rgba(232,130,154,0.12);
-    }
-
-    .post-nav-item.next { align-items: flex-end; text-align: right; }
-
-    .post-nav-dir {
-      font-size: 0.68rem;
-      letter-spacing: 0.1em;
-      color: #e8829a;
-      font-family: 'Cormorant Garamond', serif;
-    }
-
-    .post-nav-title {
-      font-size: 0.78rem;
-      line-height: 1.5;
-      color: #2a1f1a;
-    }
-
-    /* ===== BACK ===== */
-    .back-link {
-      display: flex;
-      justify-content: center;
-      margin-top: 2.5rem;
-    }
-
-    .back-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      font-size: 0.76rem;
-      letter-spacing: 0.15em;
-      color: #7a6560;
-      font-family: 'Cormorant Garamond', serif;
-      text-decoration: none;
-      border-bottom: 1px solid #ecddd7;
-      padding-bottom: 0.2rem;
-      transition: all 0.2s;
-    }
-
-    .back-btn:hover { color: #e8829a; border-color: #e8829a; }
-
-    /* ===== FOOTER ===== */
-    footer {
-      text-align: center;
-      padding: 2rem;
-      font-size: 0.68rem;
-      letter-spacing: 0.1em;
-      color: #7a6560;
-      font-family: 'Cormorant Garamond', serif;
-      border-top: 1px solid #ecddd7;
-      background-color: #fdf8f5;
-    }
-
-    /* ===== ANIMATION ===== */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(14px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    /* ===== RESPONSIVE ===== */
-    @media (max-width: 480px) {
-      .nav-links { gap: 0.9rem; }
-      .nav-links a { font-size: 0.68rem; }
-      .hero { height: 130px; }
-      .hero-label h1 { font-size: 2rem; }
-      .article-title { font-size: 1.15rem; }
-      .post-nav { grid-template-columns: 1fr; }
-      .post-nav-item.next { align-items: flex-start; text-align: left; }
-    }
-  </style>
+  <link rel="stylesheet" href="css/news.css">
 </head>
 <body>
 
   <!-- ナビゲーション -->
   <header class="site-nav">
-    <a href="/" class="nav-logo">ている×ている</a>
+    <a href="index.html" class="nav-logo">
+      <img src="images/logo.png" alt="ている×ている" class="nav-logo-img">
+    </a>
     <ul class="nav-links">
-      <li><a href="/works">WORKS</a></li>
-      <li><a href="/about">ABOUT</a></li>
-      <li><a href="/news">NEWS</a></li>
-      <li><a href="/contact">CONTACT</a></li>
+      <li><a href="index.html#sec-works">WORKS</a></li>
+      <li><a href="index.html#sec-about">ABOUT</a></li>
+      <li><a href="news.html">NEWS</a></li>
+      <li><a href="index.html#sec-contact">CONTACT</a></li>
     </ul>
   </header>
 
@@ -415,61 +40,31 @@
 
     <!-- パンくず -->
     <div class="breadcrumb">
-      <a href="/">HOME</a>
+      <a href="index.html">HOME</a>
       <span>›</span>
-      <span>コミックマーケット106 参加決定</span>
+      <a href="news.html">NEWS</a>
+      <span>›</span>
+      <span id="breadcrumb-title">記事タイトル</span>
     </div>
 
-    <!-- 記事 -->
+    <!-- 記事（news-detail.jsが動的に挿入） -->
     <article class="article">
 
       <div class="article-meta">
-        <span class="article-date">2025.04.27</span>
-        <span class="tag tag-event">イベント</span>
+        <span class="article-date" id="article-date"></span>
+        <span class="tag" id="article-tag"></span>
       </div>
 
-      <h2 class="article-title">コミックマーケット106 参加決定！</h2>
+      <h2 class="article-title" id="article-title"></h2>
 
       <div class="article-divider"></div>
 
-      <div class="article-body">
-        <p>
-          コミックマーケット106への参加が決定しました！<br>
-          今回も新作を引っ提げて参加予定です。スペース詳細は決定次第、こちらのサイトおよびSNSにてお知らせします。
-        </p>
-
-        <div class="info-box">
-          <div class="info-box-header">EVENT INFO</div>
-          <div class="info-box-body">
-            <div class="info-row">
-              <div class="info-label">イベント</div>
-              <div class="info-value">コミックマーケット106</div>
-            </div>
-            <div class="info-row">
-              <div class="info-label">日時</div>
-              <div class="info-value">2025年8月中旬（詳細未定）</div>
-            </div>
-            <div class="info-row">
-              <div class="info-label">場所</div>
-              <div class="info-value">東京ビッグサイト</div>
-            </div>
-            <div class="info-row">
-              <div class="info-label">スペース</div>
-              <div class="info-value">後日お知らせします</div>
-            </div>
-          </div>
-        </div>
-
-        <p>
-          詳細が決まりましたら随時更新していきます。<br>
-          ぜひ遊びに来てください。お待ちしております！
-        </p>
-      </div>
+      <div class="article-body" id="article-body"></div>
 
       <!-- シェア -->
       <div class="share-section">
         <div class="share-label">SHARE</div>
-        <a href="#" class="share-btn">
+        <a id="share-btn" href="#" target="_blank" rel="noopener" class="share-btn">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
             <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
           </svg>
@@ -481,26 +76,27 @@
 
     <!-- 前後ナビ -->
     <nav class="post-nav">
-      <a href="#" class="post-nav-item prev">
+      <a href="#" class="post-nav-item prev" id="nav-prev">
         <span class="post-nav-dir">← 前の記事</span>
-        <span class="post-nav-title">新刊「ている×ている Vol.3」BOOTH通販開始</span>
+        <span class="post-nav-title"></span>
       </a>
-      <a href="#" class="post-nav-item next">
+      <a href="#" class="post-nav-item next" id="nav-next">
         <span class="post-nav-dir">次の記事 →</span>
-        <span class="post-nav-title">コミックマーケット105 参加しました！</span>
+        <span class="post-nav-title"></span>
       </a>
     </nav>
 
     <!-- 戻るボタン -->
     <div class="back-link">
-      <a href="/" class="back-btn">← HOMEへ戻る</a>
+      <a href="news.html" class="back-btn">← NEWSへ戻る</a>
     </div>
 
   </main>
 
   <footer>
-    © 2025 ている×ている. All rights reserved.
+    &copy; 2025 ている×ている. All rights reserved.
   </footer>
 
+  <script src="js/news-detail.js"></script>
 </body>
 </html>

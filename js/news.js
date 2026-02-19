@@ -1,44 +1,67 @@
-/* ===================================================
-   news.js — ている×ている NEWS一覧ページ スクリプト
-   news.json からデータを読み込んで一覧を描画します
-   =================================================== */
+/* ===== news.js: ニュース一覧ページ ===== */
 
-const TAG_MAP = {
-  event:   { label: 'イベント', cls: 'tag-event' },
-  release: { label: '新刊',     cls: 'tag-release' },
-  info:    { label: 'お知らせ', cls: 'tag-info' }
+const TAG_CLASS = {
+  event:   'tag-event',
+  release: 'tag-release',
+  info:    'tag-info',
+  news:    'tag-info'
 };
 
-async function loadNewsList() {
-  const list = document.getElementById('news-index-list');
-  if (!list) return;
+let allNews = [];
+let currentFilter = 'all';
 
-  let data;
+async function loadNews() {
   try {
     const res = await fetch('news.json');
-    data = await res.json();
+    if (!res.ok) throw new Error('news.json not found');
+    allNews = await res.json();
+    renderList(allNews);
   } catch (e) {
-    list.innerHTML = '<p style="color:#7a6560;padding:2rem 0;">ニュースの読み込みに失敗しました。</p>';
-    console.error('news.json の読み込みに失敗しました:', e);
-    return;
+    const list = document.getElementById('news-card-list');
+    if (list) list.innerHTML = '<p style="color:#e8829a;">ニュースの読み込みに失敗しました。</p>';
   }
-
-  if (!data.news || data.news.length === 0) {
-    list.innerHTML = '<p style="color:#7a6560;padding:2rem 0;">ニュースはまだありません。</p>';
-    return;
-  }
-
-  list.innerHTML = data.news.map((item, i) => {
-    const tag = TAG_MAP[item.tag] || { label: item.tag, cls: 'tag-info' };
-    return `
-      <a class="news-index-item" href="news-detail.html?id=${item.id}"
-         style="animation-delay:${i * 0.05}s">
-        <span class="news-index-date">${item.date}</span>
-        <span class="tag ${tag.cls}">${tag.label}</span>
-        <span class="news-index-title">${item.title}</span>
-      </a>
-    `;
-  }).join('');
 }
 
-document.addEventListener('DOMContentLoaded', loadNewsList);
+function renderList(news) {
+  const list = document.getElementById('news-card-list');
+  if (!list) return;
+  list.innerHTML = '';
+
+  if (news.length === 0) {
+    list.innerHTML = '<p style="color:#7a6560;padding:2rem 0;">該当する記事はありません。</p>';
+    return;
+  }
+
+  news.forEach(item => {
+    const a = document.createElement('a');
+    a.href = `news-detail.html?id=${item.id}`;
+    a.className = 'news-card';
+    a.innerHTML = `
+      <span class="news-card-date">${item.date}</span>
+      <span class="tag ${TAG_CLASS[item.tag] || 'tag-info'}">${item.tagLabel}</span>
+      <span class="news-card-title">${item.title}</span>
+    `;
+    list.appendChild(a);
+  });
+}
+
+function filterNews(tag) {
+  currentFilter = tag;
+
+  /* フィルタボタンのactive状態を切り替え */
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.tag === tag);
+  });
+
+  const filtered = tag === 'all' ? allNews : allNews.filter(n => n.tag === tag);
+  renderList(filtered);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  loadNews();
+
+  /* フィルタボタンにイベント付与 */
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => filterNews(btn.dataset.tag));
+  });
+});
