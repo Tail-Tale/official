@@ -335,6 +335,32 @@ nav.scrolled .nav-logo-img {
   display: block;
 }
 
+.work-coming-soon {
+  width: 100%;
+  height: 340px;
+  background: linear-gradient(135deg, #f9e4ec, #e8d0f0, #d4dff8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.coming-soon-q {
+  font-family: "Kaisei Opti", serif;
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--pink-dark);
+  letter-spacing: 0.15em;
+}
+
+.coming-soon-label {
+  font-size: 0.82rem;
+  letter-spacing: 0.25em;
+  color: var(--text-light);
+  font-family: "Noto Serif JP", serif;
+}
+
 .work-card-body { padding: 18px 22px 22px; }
 
 .work-card-title {
@@ -618,6 +644,14 @@ nav.scrolled .nav-logo-img {
   align-items: center;
   justify-content: center;
   font-size: 2.1rem;
+  overflow: hidden;
+}
+
+.contact-card-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .contact-card-name {
@@ -650,6 +684,33 @@ nav.scrolled .nav-logo-img {
 }
 
 .contact-card:hover .contact-card-x { background: #333; }
+
+/* ===== LIGHTBOX ===== */
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  background: rgba(0,0,0,0.75);
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  animation: lbFadeIn 0.25s ease;
+}
+
+.lightbox.active { display: flex; }
+
+.lightbox img {
+  max-width: 85vw;
+  max-height: 85vh;
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 16px 64px rgba(0,0,0,0.4);
+  animation: lbZoomIn 0.3s ease;
+}
+
+@keyframes lbFadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes lbZoomIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
 /* ===== FOOTER ===== */
 footer {

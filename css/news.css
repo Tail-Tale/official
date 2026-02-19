@@ -29,7 +29,8 @@ body {
   html, body { background-color: #fdf8f5 !important; color: #2a1f1a !important; }
   .site-nav  { background-color: rgba(253,248,245,0.96) !important; }
   .hero      { background: linear-gradient(135deg, #f5d5df 0%, #dde6f7 50%, #fae8d0 100%) !important; }
-  .post-nav-item, .info-box, .news-card { background-color: #ffffff !important; }
+  .post-nav-item, .info-box { background-color: #ffffff !important; }
+  .news-card { background-color: transparent !important; }
   footer     { background-color: #fdf8f5 !important; }
   * { color: inherit !important; }
 }

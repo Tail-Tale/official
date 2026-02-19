@@ -1,9 +1,9 @@
 /* ===== SLIDESHOW ===== */
 const slideImages = [
-  "images/001.png",
-  "images/33.png",
-  "images/illust89.png",
-  "images/image.png"
+  "images/illust89.jpg",
+  "images/5.12.png",
+  "images/イラスト8.png",
+  "images/5.26.png"
 ];
 let currentSlide = 0;
 
@@ -134,11 +134,43 @@ function renderNewsList(news) {
   });
 }
 
+/* ===== LIGHTBOX ===== */
+function initLightbox() {
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lightbox-img');
+  if (!lb || !lbImg) return;
+
+  document.querySelectorAll('.work-card img').forEach(img => {
+    img.style.cursor = 'zoom-in';
+    img.addEventListener('click', (e) => {
+      e.stopPropagation();
+      lbImg.src = img.src;
+      lb.classList.add('active');
+    });
+  });
+
+  lb.addEventListener('click', () => {
+    lb.classList.remove('active');
+  });
+}
+
 /* ===== INIT ===== */
 document.addEventListener('DOMContentLoaded', () => {
   initLoading();
   initTop();
   initNav();
-  renderTopNews(NEWS_DATA);
-  renderNewsList(NEWS_DATA);
+  initLightbox();
+
+  fetch('news.json')
+    .then(res => res.json())
+    .then(data => {
+      renderTopNews(data);
+      renderNewsList(data);
+    })
+    .catch(() => {
+      if (typeof NEWS_DATA !== 'undefined') {
+        renderTopNews(NEWS_DATA);
+        renderNewsList(NEWS_DATA);
+      }
+    });
 });
