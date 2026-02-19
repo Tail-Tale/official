@@ -209,6 +209,23 @@ nav.scrolled .nav-logo-img {
 
 .top-news-entry:hover { opacity: 0.7; }
 
+.top-news-more {
+  display: inline-block;
+  margin-top: 14px;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  color: var(--pink);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(249,168,201,0.4);
+  padding-bottom: 2px;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.top-news-more:hover {
+  color: var(--pink-light);
+  border-color: var(--pink-light);
+}
+
 .top-news-d {
   display: block;
   font-size: 0.67rem;
