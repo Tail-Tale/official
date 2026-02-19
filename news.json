@@ -6,7 +6,7 @@
     "tagLabel": "新作",
     "title": "新作ノベルゲームページ公開",
     "summary": "新作ノベルゲームのページを公開しました",
-    "body": "<p>新作ノベルゲームのページを公開しました。</p><p>続報をお待ちください！</p>",
+    "body": "<a href='https://tail-tale.github.io/perseid/' target='_blank'><img src='images/perseid_banner.png' alt='Perseid. ペルシード' style='max-width:480px;width:100%;border-radius:8px;margin-bottom:16px;'></a><p>新作ノベルゲームのページを公開しました。</p><p><a href='https://tail-tale.github.io/perseid/' target='_blank' style='color:#6fa0d4;'>特設ページはこちら</a></p>",
     "info": {}
   },
   {
