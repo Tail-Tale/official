@@ -99,18 +99,7 @@ function initLoading() {
   });
 }
 
-/* ===== NEWS: news.jsonから読み込み ===== */
-async function loadNews() {
-  try {
-    const res = await fetch('news.json');
-    if (!res.ok) throw new Error('news.json not found');
-    const news = await res.json();
-    renderTopNews(news);
-    renderNewsList(news);
-  } catch (e) {
-    console.warn('news.json の読み込みに失敗しました:', e);
-  }
-}
+/* ===== NEWS: news-data.js の NEWS_DATA を使用 ===== */
 
 /* TOPセクションの最新ニュース5件 */
 function renderTopNews(news) {
@@ -120,11 +109,10 @@ function renderTopNews(news) {
   news.slice(0, 5).forEach(item => {
     const a = document.createElement('a');
     a.className = 'top-news-entry';
-    a.href = `news-detail.html?id=${item.id}`;
-    a.innerHTML = `
-      <span class="top-news-d">${item.date}</span>
-      <span class="top-news-t">${item.summary}</span>
-    `;
+    a.href = 'news-detail.html?id=' + item.id;
+    a.innerHTML =
+      '<span class="top-news-d">' + item.date + '</span>' +
+      '<span class="top-news-t">' + item.summary + '</span>';
     list.appendChild(a);
   });
 }
@@ -136,13 +124,12 @@ function renderNewsList(news) {
   list.innerHTML = '';
   news.forEach(item => {
     const a = document.createElement('a');
-    a.href = `news-detail.html?id=${item.id}`;
+    a.href = 'news-detail.html?id=' + item.id;
     a.className = 'news-item';
-    a.innerHTML = `
-      <span class="news-date">${item.date}</span>
-      <span class="news-tag tag-${item.tag}">${item.tagLabel}</span>
-      <span class="news-title">${item.title}</span>
-    `;
+    a.innerHTML =
+      '<span class="news-date">' + item.date + '</span>' +
+      '<span class="news-tag tag-' + item.tag + '">' + item.tagLabel + '</span>' +
+      '<span class="news-title">' + item.title + '</span>';
     list.appendChild(a);
   });
 }
@@ -152,5 +139,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initLoading();
   initTop();
   initNav();
-  loadNews();
+  renderTopNews(NEWS_DATA);
+  renderNewsList(NEWS_DATA);
 });
