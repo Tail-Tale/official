@@ -542,6 +542,28 @@ nav.scrolled .nav-logo-img {
 
 .news-title { font-size: 0.94rem; line-height: 1.65; }
 
+.news-more-wrap {
+  text-align: center;
+  padding: 8px 0 72px;
+}
+
+.news-more-btn {
+  display: inline-block;
+  padding: 12px 40px;
+  border: 1.5px solid var(--pink-dark);
+  border-radius: 99px;
+  color: var(--pink-dark);
+  text-decoration: none;
+  font-size: 0.82rem;
+  letter-spacing: 0.18em;
+  transition: background 0.2s, color 0.2s;
+}
+
+.news-more-btn:hover {
+  background: var(--pink-dark);
+  color: white;
+}
+
 /* ===== CONTACT SECTION ===== */
 #sec-contact {
   background: white;
