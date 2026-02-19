@@ -174,3 +174,37 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 });
+
+/* ===== PERSEID BANNER ===== */
+(function() {
+  var closeBtn = document.getElementById('perseidBnrClose');
+  var bnr = document.getElementById('perseidBnr');
+  var top = document.getElementById('sec-top');
+  if (!bnr || !top) return;
+
+  var closed = false;
+
+  closeBtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    closed = true;
+    bnr.classList.add('hidden');
+  });
+
+  var shown = false;
+  function checkVisible() {
+    if (closed) return;
+    var rect = top.getBoundingClientRect();
+    var inTop = rect.bottom > window.innerHeight * 0.3;
+    if (inTop && !shown) {
+      shown = true;
+      bnr.classList.add('show');
+    } else if (!inTop && shown) {
+      shown = false;
+      bnr.classList.remove('show');
+    }
+  }
+  window.addEventListener('scroll', checkVisible);
+  // 初回は少し遅らせて表示
+  setTimeout(checkVisible, 1000);
+})();

@@ -896,3 +896,38 @@ footer {
   .contact-cards { grid-template-columns: 1fr !important; }
   .contact-card { padding: 32px 24px; }
 }
+
+/* ===== PERSEID BANNER ===== */
+.perseid-bnr {
+  position: fixed;
+  bottom: 1.5rem; right: 1.5rem;
+  z-index: 900;
+  display: block;
+  width: 320px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.35);
+  opacity: 0; transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.3s ease;
+  pointer-events: none;
+}
+.perseid-bnr.show {
+  opacity: 1; transform: translateY(0);
+  pointer-events: auto;
+}
+.perseid-bnr.show:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.45), 0 0 16px rgba(111,160,212,0.3);
+}
+.perseid-bnr img { width: 100%; display: block; }
+.perseid-bnr-close {
+  position: absolute; top: 4px; right: 8px;
+  color: rgba(255,255,255,0.7); font-size: 1.2rem;
+  line-height: 1; cursor: pointer;
+  transition: color 0.2s;
+}
+.perseid-bnr-close:hover { color: #fff; }
+.perseid-bnr.hidden { display: none; }
+@media (max-width: 700px) {
+  .perseid-bnr { width: 180px; bottom: 0.8rem; right: 0.8rem; }
+}
