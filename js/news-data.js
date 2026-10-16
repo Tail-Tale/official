@@ -4,6 +4,16 @@
  */
 const NEWS_DATA = [
   {
+    id: "perseid-announce-2026",
+    date: "2026.03.14",
+    tag: "release",
+    tagLabel: "新作",
+    title: "新作ノベルゲーム『Perseid.』発表",
+    summary: "新作ノベルゲーム『Perseid.』を発表しました",
+    body: "<a href='https://tail-tale.github.io/perseid/' target='_blank'><img src='images/perseid_banner.png' alt='Perseid. ペルシード' style='max-width:480px;width:100%;border-radius:8px;margin-bottom:16px;'></a><p>新作ノベルゲーム『Perseid.（ペルシード）』を発表しました！</p><p><strong>あらすじ</strong></p><p>流星群が降り注ぐ夜、山の頂で空に向かって叫んだ。<br>「うちゅうじんさん、きこえますかー！」<br>あれから10年。<br>星を愛しながら人を遠ざけてきた高校生・明日斗の部室に、<br>ある夏の日、一人の少女が飛び込んでくる。<br>「宇宙人さんとおともだちになりたいんです！」<br>底抜けに明るいその笑顔は、<br>静かな星空に一筋の光が走るように、<br>彼の日常を照らし始めた——。</p><p><strong>スタッフ</strong></p><p>企画・システム　七咲凪<br>イラスト　弱肉定食<br>シナリオ　かみしろ</p><p>キャラクターやストーリーなどの詳しい情報は特設ページで公開しています。</p><p><a href='https://tail-tale.github.io/perseid/' target='_blank' style='color:#6fa0d4;'>特設ページはこちら</a></p>",
+    info: {}
+  },
+  {
     id: "vol3-booth-2025",
     date: "2026.02.20",
     tag: "release",
