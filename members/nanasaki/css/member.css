@@ -127,8 +127,9 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .hero-copy h1 { font-family: var(--f-en); font-weight: 300; text-transform: uppercase; font-size: clamp(2.2rem, 4.4vw, 3.6rem); letter-spacing: 0.16em; line-height: 1.15; }
 .hero-copy h1 span { display: block; padding-left: 1.4em; }
 .hero-copy .lead { font-family: var(--f-jp-display); font-size: 0.92rem; line-height: 2.2; }
-.circles { list-style: none; margin-top: 18px; display: grid; gap: 4px; font-size: 0.8rem; color: var(--mute); opacity: 0; transition: opacity 0.7s ease; }
-.circles.visible { opacity: 1; }
+.circles { list-style: none; margin-top: 18px; display: grid; gap: 4px; font-size: 0.8rem; color: var(--mute); }
+.hero-copy .circles { opacity: 0; transition: opacity 0.7s ease; }
+.hero-copy .circles.visible { opacity: 1; }
 .circles b { font-weight: 400; color: var(--ink); margin-right: 10px; }
 .hero-name {
   writing-mode: vertical-rl; border-left: 1px solid var(--line);
