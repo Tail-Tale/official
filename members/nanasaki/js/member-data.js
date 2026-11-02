@@ -12,7 +12,7 @@ const MEMBER = {
   avatar: "images/avatar.jpg",
   kv: "shared/illust89.jpg",
   kicker: "Illustration & System",
-  lead: ["淡い色彩とやわらかい線で、", "日常の中のちいさなきらめきを描く。"],
+  lead: ["絵を描いたり、漫画を描いたり、", "ノベルゲームを作ったりしています。"],
   links: [
     { label: "X", handle: "@nanasaki_sub", url: "https://x.com/nanasaki_sub" },
     { label: "Skeb", handle: "@nanasaki_sub", url: "https://skeb.jp/@nanasaki_sub" },
@@ -175,8 +175,9 @@ const GALLERY = [
 
 const PROFILE = {
   bio: [
+    "茨城県出身、神奈川県在住。",
     "個人サークル「ななぶさき」で創作をしながら、同人サークル「ている×ている」ではイラストとシステムを担当しています。",
-    "淡い色彩とやわらかい線で、日常の中のちいさなきらめきを描くのが好きです。ノベルゲーム『Perseid.』では企画とシステムを手がけ、絵とプログラムの両方から作品づくりに関わっています。"
+    "ノベルゲーム『Perseid.』では企画とシステムを手がけ、絵とプログラムの両方から作品づくりに関わっています。"
   ],
   history: [
     { date: "2026.10", text: "新作ノベルゲーム『Perseid.』を発表（企画・システム）" },
