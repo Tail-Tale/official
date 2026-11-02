@@ -197,6 +197,7 @@
       </section>`;
     initPeek(document.getElementById("top-index"));
     initTypewriter();
+    initAvatarCanvas();
   }
 
   /* ===== タイプライター ===== */
@@ -284,7 +285,7 @@
     return `
       <div class="profile">
         <div class="profile-side reveal">
-          ${MEMBER.avatar ? `<div class="avatar"><img src="${esc(MEMBER.avatar)}" alt="${esc(MEMBER.name)}"></div>` : ""}
+          <div class="avatar" id="avatar-canvas-wrap"></div>
           <div class="name">${esc(MEMBER.name)}</div>
           <div class="roman en">${esc(MEMBER.roman)}</div>
         </div>
@@ -503,6 +504,49 @@
       }, { rootMargin: "0px 0px -5% 0px" });
       if (rows[0]) io.observe(rows[0]);
     });
+  }
+
+  /* ===== アバターキャンバス（テキストアニメーション） ===== */
+  function initAvatarCanvas() {
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const wrap = document.getElementById("avatar-canvas-wrap");
+    if (!wrap) return;
+    const canvas = document.createElement("canvas");
+    canvas.style.cssText = "width:100%;height:100%;display:block;";
+    wrap.appendChild(canvas);
+    const ctx = canvas.getContext("2d");
+    const words = ["シナリオ", "Scenario", "泣きゲー", "チルい", "Perseid.", "物語", "特殊能力", "流星", "宇宙人", "夏", "星", "せりふ"];
+    const fontFace = `"Zen Kaku Gothic New", "Hiragino Sans", sans-serif`;
+    let W, H;
+    function resize() {
+      W = canvas.width = wrap.offsetWidth;
+      H = canvas.height = wrap.offsetHeight;
+    }
+    resize();
+    window.addEventListener("resize", resize, { passive: true });
+    const pts = [];
+    function spawn() {
+      const size = 11 + Math.floor(Math.random() * 8);
+      pts.push({ word: words[Math.floor(Math.random() * words.length)], x: 8 + Math.random() * (W - 80), y: H + 10, vy: -(0.22 + Math.random() * 0.3), size, life: 0, max: 200 + Math.random() * 160 });
+    }
+    for (let i = 0; i < 6; i++) { spawn(); const p = pts[pts.length - 1]; p.y = Math.random() * H; p.life = Math.floor(Math.random() * p.max * 0.5); }
+    let t = 0;
+    (function draw() {
+      requestAnimationFrame(draw);
+      ctx.clearRect(0, 0, W, H);
+      if (++t % 38 === 0) spawn();
+      for (let i = pts.length - 1; i >= 0; i--) {
+        const p = pts[i];
+        p.life++; p.y += p.vy;
+        if (p.life >= p.max || p.y < -20) { pts.splice(i, 1); continue; }
+        const r = p.life / p.max;
+        const a = r < 0.15 ? r / 0.15 : r > 0.72 ? (1 - r) / 0.28 : 1;
+        ctx.globalAlpha = a * 0.6;
+        ctx.font = `300 ${p.size}px ${fontFace}`;
+        ctx.fillStyle = "#26252d";
+        ctx.fillText(p.word, p.x, p.y);
+      }
+    })();
   }
 
   renderHeader();

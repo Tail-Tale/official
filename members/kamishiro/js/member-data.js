@@ -10,7 +10,7 @@ const MEMBER = {
   circles: [
     { id: "tail-tale", name: "ている×ている", label: "参加サークル", role: "シナリオ担当", url: "https://tail-tale.github.io/official/", listed: false }
   ],
-  avatar: "images/avatar.webp",
+  avatar: null,
   kv: null,
   kvCaption: "",
   kicker: "Scenario",
