@@ -112,7 +112,7 @@
     document.body.appendChild(peek);
     const img = peek.querySelector("img");
     scope.querySelectorAll("[data-img]").forEach((row) => {
-      row.addEventListener("mouseenter", () => { img.src = row.dataset.img; peek.classList.add("on"); });
+      row.addEventListener("mouseenter", () => { if (!row.dataset.img) return; img.src = row.dataset.img; peek.classList.add("on"); });
       row.addEventListener("mouseleave", () => peek.classList.remove("on"));
       row.addEventListener("mousemove", (e) => { peek.style.left = e.clientX + 120 + "px"; peek.style.top = e.clientY + 40 + "px"; });
     });
