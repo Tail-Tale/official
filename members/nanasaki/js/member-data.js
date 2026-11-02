@@ -26,73 +26,8 @@ const MEMBER = {
   ]
 };
 
-/* WORKS：作品。新しいものを上に書きます。circle は MEMBER.circles の id */
+/* WORKS：新しいものを上に（発行日順） */
 const WORKS = [
-  {
-    id: "lian-fortuna",
-    circle: "guest",
-    title: "Lian Fortuna",
-    kana: "リアン・フォルトゥナ",
-    type: "合同誌（寄稿）",
-    year: "2025",
-    role: "寄稿（イラスト）",
-    image: null,
-    text: "ごちうさオールキャラ合同誌。コミックマーケット107にてゲスト参加しました。",
-    credits: "",
-    link: null
-  },
-  {
-    id: "stella-ensemble-3",
-    circle: "guest",
-    title: "StellaEnsemble 3+",
-    kana: "ステラアンサンブル3プラス",
-    type: "合同誌（寄稿）",
-    year: "2025",
-    role: "寄稿（イラスト）",
-    image: null,
-    text: "きゃべつそふと合同誌。コミックマーケット107にてゲスト参加しました。",
-    credits: "",
-    link: null
-  },
-  {
-    id: "stardust-owl",
-    circle: "guest",
-    title: "Stardust Owl",
-    kana: "スターダストアウル",
-    type: "合同誌（寄稿）",
-    year: "2025",
-    role: "寄稿（イラスト）",
-    image: null,
-    text: "篠澤広百人合同誌。学園スターフェスティバル02（2025.11.16）にてゲスト参加しました。",
-    credits: "",
-    link: null
-  },
-  {
-    id: "sunlite-score",
-    circle: "guest",
-    title: "SUNLITE SCORE",
-    kana: "サンライトスコア",
-    type: "合同誌（寄稿）",
-    year: "2025",
-    role: "寄稿（イラスト）",
-    image: null,
-    text: "倉本千奈合同誌。コミックマーケット106にてゲスト参加しました。",
-    credits: "",
-    link: null
-  },
-  {
-    id: "stella-ensemble-2",
-    circle: "guest",
-    title: "StellaEnsemble 2+",
-    kana: "ステラアンサンブル2プラス",
-    type: "合同誌（寄稿）",
-    year: "2025",
-    role: "寄稿（イラスト）",
-    image: null,
-    text: "きゃべつそふと合同誌。コミックマーケット106にてゲスト参加しました。",
-    credits: "",
-    link: null
-  },
   {
     id: "perseid",
     circle: "tail-tale",
@@ -134,6 +69,45 @@ const WORKS = [
     link: null
   },
   {
+    id: "lian-fortuna",
+    circle: "guest",
+    title: "Lian Fortuna",
+    kana: "リアン・フォルトゥナ",
+    type: "合同誌（寄稿）",
+    year: "2025",
+    role: "寄稿（イラスト）",
+    image: null,
+    text: "ごちうさオールキャラ合同誌。コミックマーケット107にてゲスト参加しました。",
+    credits: "",
+    link: null
+  },
+  {
+    id: "stella-ensemble-3",
+    circle: "guest",
+    title: "StellaEnsemble 3+",
+    kana: "ステラアンサンブル3プラス",
+    type: "合同誌（寄稿）",
+    year: "2025",
+    role: "寄稿（イラスト）",
+    image: null,
+    text: "きゃべつそふと合同誌。コミックマーケット107にてゲスト参加しました。",
+    credits: "",
+    link: null
+  },
+  {
+    id: "stardust-owl",
+    circle: "guest",
+    title: "Stardust Owl",
+    kana: "スターダストアウル",
+    type: "合同誌（寄稿）",
+    year: "2025",
+    role: "寄稿（イラスト）",
+    image: null,
+    text: "篠澤広百人合同誌。学園スターフェスティバル02（2025.11.16）にてゲスト参加しました。",
+    credits: "",
+    link: null
+  },
+  {
     id: "saku-awayuki-ni-soete-c106",
     circle: "nanabusaki",
     title: "咲く淡雪に添えて",
@@ -146,6 +120,32 @@ const WORKS = [
     credits: "",
     link: null,
     tentative: false
+  },
+  {
+    id: "sunlite-score",
+    circle: "guest",
+    title: "SUNLITE SCORE",
+    kana: "サンライトスコア",
+    type: "合同誌（寄稿）",
+    year: "2025",
+    role: "寄稿（イラスト）",
+    image: null,
+    text: "倉本千奈合同誌。コミックマーケット106にてゲスト参加しました。",
+    credits: "",
+    link: null
+  },
+  {
+    id: "stella-ensemble-2",
+    circle: "guest",
+    title: "StellaEnsemble 2+",
+    kana: "ステラアンサンブル2プラス",
+    type: "合同誌（寄稿）",
+    year: "2025",
+    role: "寄稿（イラスト）",
+    image: null,
+    text: "きゃべつそふと合同誌。コミックマーケット106にてゲスト参加しました。",
+    credits: "",
+    link: null
   },
   {
     id: "ashiato-ni-saku-futatsu",

@@ -142,6 +142,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 
 /* ===== 作品目録（Top・Works 共通の行） ===== */
 .index { list-style: none; }
+.top-works-scroll { max-height: 420px; overflow-y: auto; border-top: 1px solid var(--line); }
 .index-row { border-bottom: 1px solid var(--line); }
 .index-row > a, .index-row > button {
   display: grid; grid-template-columns: minmax(0, 1fr) 150px 110px 64px; gap: 20px; align-items: baseline;

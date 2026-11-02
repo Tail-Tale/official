@@ -192,8 +192,8 @@
 
       <section class="sec wrap" aria-label="Works">
         ${labelRow("h2", "Works", "作品目録", `<a class="side" href="works.html">View all →</a>`)}
-        <ol class="index" id="top-index">
-          ${WORKS.slice(0, 5).map((x, i) => indexRow(x, i, {})).join("")}
+        <ol class="index top-works-scroll" id="top-index">
+          ${WORKS.map((x, i) => indexRow(x, i, {})).join("")}
         </ol>
       </section>
 
