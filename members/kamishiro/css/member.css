@@ -374,6 +374,9 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   .hero-art { grid-column: 1 / -1; aspect-ratio: 4 / 5; max-height: 72vh; border-right: 0; border-bottom: 1px solid var(--line); }
   .hero-copy { padding: 32px 24px 36px; }
   .hero-name { font-size: 1.15rem; padding: 24px 0; }
+  .hero.hero-canvas { grid-template-columns: minmax(0, 1fr) 56px; }
+  .hero.hero-canvas .hero-art { aspect-ratio: 2 / 1; max-height: 35vh; }
+  .hero.hero-canvas .hero-copy { border-right: 1px solid var(--line); }
 
   .index-row > a, .index-row > button { grid-template-columns: minmax(0, 1fr) 52px; gap: 12px; }
   .index-row .c, .index-row .k { display: none; }
