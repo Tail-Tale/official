@@ -128,14 +128,13 @@ nav.scrolled .nav-links a:hover {
 }
 
 .top-logo {
-  font-family: "Kaisei Opti", serif;
+  font-family: "Zen Kaku Gothic New", sans-serif;
   font-size: 3.8rem;
-  font-weight: 700;
+  font-weight: 300;
   color: white;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.18em;
   line-height: 1.2;
   margin-bottom: 12px;
-  text-shadow: 0 2px 16px rgba(249,168,201,0.4);
 }
 
 .top-logo-sub {
