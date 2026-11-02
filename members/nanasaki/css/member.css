@@ -336,6 +336,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   .nnb-bnr-body { height: 104px; }
   .nnb-bnr-text { padding: 12px 14px; gap: 2px; }
   .nnb-bnr-img { width: 84px; }
+  .nnb-bnr-img img { object-position: center 80%; }
 }
 @media (max-width: 1240px) {
   .nnb-bnr { display: none !important; }
