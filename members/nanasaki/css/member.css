@@ -335,7 +335,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .nnb-bnr-close:hover { color: var(--ink); }
 .nnb-bnr.hidden { display: none; }
 @media (max-width: 700px) {
-  .nnb-bnr { width: 290px; bottom: 0.8rem; right: 0.8rem; }
+  .nnb-bnr { width: 290px; bottom: 38vh; right: 0.8rem; }
   .nnb-bnr-img { width: 116px; }
 }
 
