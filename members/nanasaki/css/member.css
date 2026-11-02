@@ -371,7 +371,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   .gnav a { font-size: 1.6rem; letter-spacing: 0.3em; }
   .gnav .circle-link { border-left: 0; padding-left: 0; font-size: 0.85rem; }
 
-  .hero { grid-template-columns: minmax(0, 1fr) 56px; min-height: 0; }
+  .hero { grid-template-columns: minmax(0, 1fr) 56px; min-height: 0; height: auto; }
   .hero-art { grid-column: 1 / -1; aspect-ratio: 4 / 5; max-height: 72vh; border-right: 0; border-bottom: 1px solid var(--line); }
   .hero-copy { padding: 32px 24px 36px; }
   .hero-name { font-size: 1.15rem; padding: 24px 0; }
