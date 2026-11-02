@@ -48,7 +48,10 @@
     el.className = "site-footer";
     el.innerHTML = `
       <div class="wrap">
-        <div class="footer-mark">${esc(MEMBER.roman)}</div>
+        <div class="footer-head">
+          <div class="footer-mark">${esc(MEMBER.roman)}</div>
+          <a class="footer-logo" href="${CIRCLE_URL}"><img src="../../images/logo.png" alt="ている×ている" width="400" height="140"></a>
+        </div>
         <div class="footer-grid">
           <ul class="footer-nav">
             ${PAGES.map((p) => `<li><a href="${p.href}">${p.label}</a></li>`).join("")}
@@ -218,10 +221,53 @@
     initTypewriter();
   }
 
+  function handNameHTML() {
+    const [x, y, w, h] = HAND_NAME.box;
+    const box = `x="${x}" y="${y}" width="${w}" height="${h}"`;
+    return `
+      <svg class="hand-name" viewBox="${x} ${y} ${w} ${h}" aria-hidden="true">
+        <mask id="hand-name-mask" maskUnits="userSpaceOnUse" ${box}>
+          ${HAND_NAME.strokes.map((d) => `<path d="${d}" pathLength="1" stroke-dasharray="1 2" stroke-dashoffset="1"/>`).join("")}
+        </mask>
+        <image href="${HAND_NAME.src}" ${box} mask="url(#hand-name-mask)"/>
+      </svg>`;
+  }
+
+  function drawHandName(svg) {
+    const plan = [];
+    let at = 0;
+    [...svg.querySelectorAll("mask path")].forEach((path, i) => {
+      if (i) at += HAND_NAME.breaks[i] ?? 25;
+      const dur = 40 + path.getTotalLength() * 0.08;
+      plan.push({ path, at, dur });
+      at += dur;
+    });
+
+    const ease = (t) => t * t * (3 - 2 * t);
+    let start, next = 0;
+    (function frame(now) {
+      start ??= now;
+      const t = now - start;
+      for (; next < plan.length && plan[next].at + plan[next].dur <= t; next++) {
+        plan[next].path.style.stroke = "#fff";
+        plan[next].path.setAttribute("stroke-dashoffset", 0);
+      }
+      const cur = plan[next];
+      if (cur && cur.at <= t) {
+        cur.path.style.stroke = "#fff";
+        cur.path.setAttribute("stroke-dashoffset", 1 - ease((t - cur.at) / cur.dur));
+      }
+      if (next < plan.length) { requestAnimationFrame(frame); return; }
+      svg.querySelector("image").removeAttribute("mask");
+    })(performance.now());
+  }
+
   function initTypewriter() {
+    const h1 = document.querySelector(".hero-copy h1");
+    if (h1) h1.innerHTML = handNameHTML();
+
     if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      const h1 = document.querySelector(".hero-copy h1");
-      if (h1) h1.innerHTML = esc(MEMBER.roman).replace(" ", "<span>") + "</span>";
+      if (h1) h1.querySelector("image").removeAttribute("mask");
       const leadEl = document.querySelector(".lead");
       if (leadEl) leadEl.innerHTML = MEMBER.lead.map(esc).join("<br>");
       const ul = document.querySelector(".hero-copy .circles");
@@ -229,63 +275,40 @@
       return;
     }
 
-    function typeText(container, text, onDone) {
-      let i = 0;
+    const lead = document.querySelector(".lead");
+    if (lead) {
+      lead.innerHTML = MEMBER.lead.map(esc).join("<br>");
+      lead.style.minHeight = lead.offsetHeight + "px";
+      lead.innerHTML = "";
+    }
+
+    function typeLead() {
+      const leadEl = document.querySelector(".lead");
+      if (!leadEl) return;
+      let lineIdx = 0, charIdx = 0;
       (function tick() {
-        if (i < text.length) {
-          container.appendChild(document.createTextNode(text[i++]));
-          setTimeout(tick, 50);
-        } else {
-          if (onDone) onDone();
+        if (lineIdx >= MEMBER.lead.length) {
+          const c = leadEl.closest(".hero-copy");
+          if (c) { const ul = c.querySelector(".circles"); if (ul) setTimeout(() => ul.classList.add("visible"), 200); }
+          return;
         }
+        const line = MEMBER.lead[lineIdx];
+        if (charIdx === 0 && lineIdx > 0) leadEl.appendChild(document.createElement("br"));
+        if (charIdx < line.length) {
+          leadEl.appendChild(document.createTextNode(line[charIdx++]));
+          setTimeout(tick, 50);
+        } else { lineIdx++; charIdx = 0; setTimeout(tick, 200); }
       })();
     }
 
-    setTimeout(() => {
-      const h1 = document.querySelector(".hero-copy h1");
-      if (!h1) return;
-
-      // タイプ前に最終的な高さを測って確保（レイアウトシフト防止）
-      h1.innerHTML = esc(MEMBER.roman).replace(" ", "<span>") + "</span>";
-      h1.style.minHeight = h1.offsetHeight + "px";
-      h1.innerHTML = "";
-
-      const leadEl = document.querySelector(".lead");
-      if (leadEl) {
-        leadEl.innerHTML = MEMBER.lead.map(esc).join("<br>");
-        leadEl.style.minHeight = leadEl.offsetHeight + "px";
-        leadEl.innerHTML = "";
-      }
-
-      const [first, second] = MEMBER.roman.split(" ");
-
-      typeText(h1, first, () => {
-        setTimeout(() => {
-          const span = document.createElement("span");
-          h1.appendChild(span);
-          typeText(span, " " + second, () => {
-            setTimeout(() => {
-              const leadEl = document.querySelector(".lead");
-              if (!leadEl) return;
-              let lineIdx = 0, charIdx = 0;
-              (function typeLead() {
-                if (lineIdx >= MEMBER.lead.length) {
-                  const c = leadEl.closest(".hero-copy");
-                  if (c) { const ul = c.querySelector(".circles"); if (ul) setTimeout(() => ul.classList.add("visible"), 200); }
-                  return;
-                }
-                const line = MEMBER.lead[lineIdx];
-                if (charIdx === 0 && lineIdx > 0) leadEl.appendChild(document.createElement("br"));
-                if (charIdx < line.length) {
-                  leadEl.appendChild(document.createTextNode(line[charIdx++]));
-                  setTimeout(typeLead, 50);
-                } else { lineIdx++; charIdx = 0; setTimeout(typeLead, 200); }
-              })();
-            }, 200);
-          });
-        }, 200);
-      });
-    }, 900);
+    const ink = new Image();
+    ink.src = HAND_NAME.src;
+    Promise.all([ink.decode().catch(() => {}), pageShown]).then(() => {
+      setTimeout(() => {
+        drawHandName(h1.firstElementChild);
+        typeLead();
+      }, 120);
+    });
   }
 
   function profileHTML() {
@@ -408,18 +431,21 @@
     main.querySelectorAll(".masonry button").forEach((b) => b.addEventListener("click", () => openLb(+b.dataset.index)));
   }
 
+  let showPage;
+  const pageShown = new Promise((resolve) => { showPage = resolve; });
+
   function initLoading() {
     const screen = document.getElementById("loading");
     const bar = document.getElementById("loading-bar");
-    if (!screen || !bar) return;
-    if (location.hash) { screen.classList.add("hidden"); return; }
+    if (!screen || !bar) { showPage(); return; }
+    if (location.hash) { screen.classList.add("hidden"); showPage(); return; }
     let prog = 0;
     let finished = false;
     const done = () => {
       if (finished) return;
       finished = true;
       bar.style.width = "100%";
-      setTimeout(() => screen.classList.add("hidden"), 450);
+      setTimeout(() => { screen.classList.add("hidden"); showPage(); }, 450);
     };
     const t = setInterval(() => {
       prog += Math.random() * 16 + 4;

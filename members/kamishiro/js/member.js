@@ -47,7 +47,10 @@
     el.className = "site-footer";
     el.innerHTML = `
       <div class="wrap">
-        <div class="footer-mark">${esc(MEMBER.roman)}</div>
+        <div class="footer-head">
+          <div class="footer-mark">${esc(MEMBER.roman)}</div>
+          <a class="footer-logo" href="${CIRCLE_URL}"><img src="../../images/logo.png" alt="ている×ている" width="400" height="140"></a>
+        </div>
         <div class="footer-grid">
           <ul class="footer-nav">
             ${PAGES.map((p) => `<li><a href="${p.href}">${p.label}</a></li>`).join("")}

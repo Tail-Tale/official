@@ -243,7 +243,11 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .links .num { color: var(--mute); font-size: 0.78rem; margin-left: 6px; }
 
 .site-footer { background: var(--bg-deep); border-top: 1px solid var(--line); padding-block: 72px calc(36px + env(safe-area-inset-bottom, 0px)); }
+.footer-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px 40px; }
 .footer-mark { font-family: var(--f-en); font-weight: 300; text-transform: uppercase; letter-spacing: 0.3em; font-size: clamp(1.6rem, 5vw, 3.4rem); line-height: 1.1; }
+.footer-logo { flex-shrink: 0; }
+.footer-logo img { width: 170px; height: auto; filter: brightness(0); opacity: 0.8; transition: opacity 0.3s; }
+.footer-logo:hover img { opacity: 1; }
 .footer-grid { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 28px; margin-top: 36px; }
 .footer-nav, .footer-sns { list-style: none; display: flex; flex-wrap: wrap; gap: 8px 28px; }
 .footer-nav a, .footer-sns a { font-family: var(--f-en); font-weight: 300; font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--mute); transition: color 0.3s; }
