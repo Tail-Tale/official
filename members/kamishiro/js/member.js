@@ -172,7 +172,7 @@
   /* ===== TOP ===== */
   function renderTop() {
     main.innerHTML = `
-      <section class="hero hero-text" aria-label="${esc(MEMBER.name)}">
+      <section class="hero hero-canvas" aria-label="${esc(MEMBER.name)}">
         <div class="hero-copy">
           <div class="kicker en">${esc(MEMBER.kicker)}</div>
           <h1 aria-label="${esc(MEMBER.roman)}"></h1>
@@ -181,6 +181,7 @@
             ${circlesList()}
           </div>
         </div>
+        <div class="hero-art" id="hero-canvas-wrap" aria-hidden="true"></div>
         <div class="hero-name" aria-hidden="true">${esc(MEMBER.name)}<small>${esc(MEMBER.kana)}</small></div>
       </section>
 
@@ -197,7 +198,7 @@
       </section>`;
     initPeek(document.getElementById("top-index"));
     initTypewriter();
-    initAvatarCanvas();
+    initHeroCanvas();
   }
 
   /* ===== タイプライター ===== */
@@ -285,7 +286,7 @@
     return `
       <div class="profile">
         <div class="profile-side reveal">
-          <div class="avatar" id="avatar-canvas-wrap"></div>
+          ${MEMBER.avatar ? `<div class="avatar"><img src="${esc(MEMBER.avatar)}" alt="${esc(MEMBER.name)}"></div>` : ""}
           <div class="name">${esc(MEMBER.name)}</div>
           <div class="roman en">${esc(MEMBER.roman)}</div>
         </div>
@@ -506,10 +507,10 @@
     });
   }
 
-  /* ===== アバターキャンバス（テキストアニメーション） ===== */
-  function initAvatarCanvas() {
+  /* ===== ヒーローキャンバス（テキストアニメーション） ===== */
+  function initHeroCanvas() {
     if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const wrap = document.getElementById("avatar-canvas-wrap");
+    const wrap = document.getElementById("hero-canvas-wrap");
     if (!wrap) return;
     const canvas = document.createElement("canvas");
     canvas.style.cssText = "width:100%;height:100%;display:block;";
