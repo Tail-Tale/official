@@ -19,7 +19,6 @@ body {
   overflow-x: hidden;
 }
 
-/* ===== NAVIGATION ===== */
 nav {
   position: fixed;
   top: 0; left: 0; right: 0;
@@ -83,7 +82,6 @@ nav.scrolled .nav-links a:hover {
   color: var(--pink-dark);
 }
 
-/* ===== TOP SECTION ===== */
 #sec-top {
   height: 100vh;
   display: grid;
@@ -197,8 +195,10 @@ nav.scrolled .nav-logo-img {
 .top-news-list { list-style: none; }
 
 .top-news-entry {
-  display: block;
-  padding: 9px 0;
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+  padding: 11px 0;
   border-bottom: 1px solid rgba(255,255,255,0.07);
   text-decoration: none;
   transition: opacity 0.2s;
@@ -210,7 +210,8 @@ nav.scrolled .nav-logo-img {
 
 .top-news-more {
   display: inline-block;
-  margin-top: 14px;
+  align-self: flex-end;
+  margin-top: 16px;
   font-size: 0.75rem;
   letter-spacing: 0.15em;
   color: var(--pink);
@@ -226,20 +227,21 @@ nav.scrolled .nav-logo-img {
 }
 
 .top-news-d {
-  display: block;
+  flex-shrink: 0;
   font-size: 0.67rem;
   color: var(--pink);
   letter-spacing: 0.15em;
-  text-align: right;
-  margin-bottom: 2px;
   font-family: "Noto Serif JP", serif;
 }
 
 .top-news-t {
-  display: block;
+  min-width: 0;
+  overflow: hidden;
   font-size: 0.81rem;
   color: rgba(255,255,255,0.68);
   line-height: 1.5;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .top-right {
@@ -258,7 +260,6 @@ nav.scrolled .nav-logo-img {
 
 .top-right-slide.active { opacity: 1; }
 
-/* ===== SECTION COMMON ===== */
 .section-header {
   text-align: center;
   padding: 80px 0 52px;
@@ -281,7 +282,6 @@ nav.scrolled .nav-logo-img {
   font-weight: 400;
 }
 
-/* ===== WORKS SECTION ===== */
 #sec-works {
   background: var(--cream);
   position: relative;
@@ -399,7 +399,6 @@ nav.scrolled .nav-logo-img {
 .carousel-btn.prev { left: 16px; }
 .carousel-btn.next { right: 16px; }
 
-/* ===== ABOUT SECTION ===== */
 #sec-about { background: #faf8f6; }
 
 .about-main {
@@ -508,7 +507,6 @@ nav.scrolled .nav-logo-img {
   display: block;
 }
 
-/* ===== NEWS SECTION ===== */
 #sec-news {
   background: var(--cream);
   position: relative;
@@ -552,18 +550,26 @@ nav.scrolled .nav-logo-img {
 }
 
 .news-tag {
-  display: inline-block;
-  padding: 4px 12px;
-  border-radius: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   font-size: 0.7rem;
-  font-weight: 700;
   letter-spacing: 0.05em;
   white-space: nowrap;
+  color: var(--text-light);
 }
 
-.tag-event   { background: #fce4f0; color: var(--pink-dark); }
-.tag-release { background: #fff0d4; color: #c07818; }
-.tag-info    { background: #e8f4f8; color: #4080a0; }
+.news-tag::before {
+  content: "";
+  flex-shrink: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #4080a0;
+}
+
+.tag-event::before   { background: var(--pink-dark); }
+.tag-release::before { background: #c07818; }
 
 .news-title { font-size: 0.94rem; line-height: 1.65; }
 
@@ -574,22 +580,20 @@ nav.scrolled .nav-logo-img {
 
 .news-more-btn {
   display: inline-block;
-  padding: 12px 40px;
-  border: 1.5px solid var(--pink-dark);
-  border-radius: 99px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--pink-dark);
   color: var(--pink-dark);
   text-decoration: none;
   font-size: 0.82rem;
   letter-spacing: 0.18em;
-  transition: background 0.2s, color 0.2s;
+  transition: color 0.2s, border-color 0.2s;
 }
 
 .news-more-btn:hover {
-  background: var(--pink-dark);
-  color: white;
+  color: var(--text);
+  border-color: var(--text);
 }
 
-/* ===== CONTACT SECTION ===== */
 #sec-contact {
   background: white;
   min-height: 60vh;
@@ -684,7 +688,6 @@ nav.scrolled .nav-logo-img {
 
 .contact-card:hover .contact-card-x { background: #333; }
 
-/* ===== LIGHTBOX ===== */
 .lightbox {
   display: none;
   position: fixed;
@@ -711,7 +714,6 @@ nav.scrolled .nav-logo-img {
 @keyframes lbFadeIn { from { opacity: 0; } to { opacity: 1; } }
 @keyframes lbZoomIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
-/* ===== FOOTER ===== */
 footer {
   background: #1a0e14;
   color: rgba(255,255,255,0.35);
@@ -721,7 +723,6 @@ footer {
   letter-spacing: 0.1em;
 }
 
-/* ===== LOADING ===== */
 #loading {
   position: fixed;
   inset: 0;
@@ -778,7 +779,6 @@ footer {
   animation: loadFadeIn 0.5s 0.6s forwards;
 }
 
-/* ===== RESPONSIVE ===== */
 @media (max-width: 1024px) {
   #sec-top {
     grid-template-columns: 1fr;
@@ -896,7 +896,6 @@ footer {
   .contact-card { padding: 32px 24px; }
 }
 
-/* ===== PERSEID BANNER ===== */
 .perseid-bnr {
   position: fixed;
   bottom: 1.5rem; right: 1.5rem;

@@ -1,4 +1,3 @@
-/* ===== SLIDESHOW ===== */
 const slideImages = [
   "images/illust89.jpg",
   "images/5.12.png",
@@ -28,7 +27,6 @@ function goSlide(idx) {
   slides[currentSlide].classList.add('active');
 }
 
-/* ===== NAV: transparent on top, white when scrolled ===== */
 function initNav() {
   const nav = document.getElementById('main-nav');
   const topSection = document.getElementById('sec-top');
@@ -44,7 +42,6 @@ function initNav() {
   }, { passive: true });
 }
 
-/* ===== CAROUSEL ===== */
 let carouselPos = 0;
 
 function carouselMove(dir) {
@@ -72,7 +69,6 @@ window.addEventListener('resize', () => {
   if (track) track.style.transform = 'translateX(0)';
 });
 
-/* ===== LOADING ===== */
 function initLoading() {
   const bar = document.getElementById('loading-bar');
   const screen = document.getElementById('loading');
@@ -99,14 +95,11 @@ function initLoading() {
   });
 }
 
-/* ===== NEWS: news-data.js の NEWS_DATA を使用 ===== */
-
-/* TOPセクションの最新ニュース5件 */
 function renderTopNews(news) {
   const list = document.getElementById('top-news-list');
   if (!list) return;
   list.innerHTML = '';
-  news.slice(0, 5).forEach(item => {
+  news.slice(0, 3).forEach(item => {
     const a = document.createElement('a');
     a.className = 'top-news-entry';
     a.href = 'news-detail.html?id=' + item.id;
@@ -117,7 +110,6 @@ function renderTopNews(news) {
   });
 }
 
-/* NEWSセクションの一覧 */
 function renderNewsList(news) {
   const list = document.getElementById('news-list');
   if (!list) return;
@@ -134,7 +126,6 @@ function renderNewsList(news) {
   });
 }
 
-/* ===== LIGHTBOX ===== */
 function initLightbox() {
   const lb = document.getElementById('lightbox');
   const lbImg = document.getElementById('lightbox-img');
@@ -155,7 +146,6 @@ function initLightbox() {
   });
 }
 
-/* ===== INIT ===== */
 document.addEventListener('DOMContentLoaded', () => {
   initLoading();
   initTop();
@@ -176,7 +166,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-/* ===== PERSEID BANNER ===== */
 (function() {
   var closeBtn = document.getElementById('perseidBnrClose');
   var bnr = document.getElementById('perseidBnr');

@@ -26,7 +26,7 @@
           <ul>
             ${PAGES.map((p) => `<li><a href="${p.href}"${p.key === current ? ' aria-current="page"' : ""}>${p.label}</a></li>`).join("")}
           </ul>
-          <a class="circle-link" href="${CIRCLE_URL}">ている×ている ↗</a>
+          <a class="circle-link" href="${CIRCLE_URL}"><img src="../../images/logo.png" alt="ている×ている" width="400" height="140"></a>
         </nav>
       </div>`;
     const btn = el.querySelector(".menu-btn");

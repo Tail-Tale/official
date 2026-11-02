@@ -1,4 +1,3 @@
-/* ===== news-detail.js ===== */
 
 const TAG_CLASS = {
   event:   'tag-event',
@@ -21,14 +20,11 @@ function loadArticle() {
   const prev = NEWS_DATA[idx + 1] || null;
   const next = NEWS_DATA[idx - 1] || null;
 
-  /* ページタイトル */
   document.title = item.title + ' | ている×ている';
 
-  /* パンくず */
   const bc = document.getElementById('breadcrumb-title');
   if (bc) bc.textContent = item.title;
 
-  /* 記事メタ */
   const dateEl = document.getElementById('article-date');
   if (dateEl) dateEl.textContent = item.date;
 
@@ -38,16 +34,13 @@ function loadArticle() {
     tagEl.className = 'tag ' + (TAG_CLASS[item.tag] || 'tag-news');
   }
 
-  /* タイトル */
   const titleEl = document.getElementById('article-title');
   if (titleEl) titleEl.textContent = item.title;
 
-  /* 本文 */
   const bodyEl = document.getElementById('article-body');
   if (bodyEl) {
     let html = item.body || '';
 
-    /* イベント情報ボックス */
     if (item.info && Object.keys(item.info).length > 0) {
       html += '<div class="info-box"><div class="info-box-header">EVENT INFO</div><div class="info-box-body">';
       for (const [label, value] of Object.entries(item.info)) {
@@ -59,7 +52,6 @@ function loadArticle() {
     bodyEl.innerHTML = html;
   }
 
-  /* Xシェアリンク */
   const shareBtn = document.getElementById('share-btn');
   if (shareBtn) {
     const shareText = encodeURIComponent(item.title + ' | ている×ている');
@@ -67,7 +59,6 @@ function loadArticle() {
     shareBtn.href = 'https://twitter.com/intent/tweet?text=' + shareText + '&url=' + shareUrl;
   }
 
-  /* 前後ナビ */
   const prevNav = document.getElementById('nav-prev');
   const nextNav = document.getElementById('nav-next');
 

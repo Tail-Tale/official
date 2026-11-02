@@ -27,7 +27,7 @@
           <ul>
             ${PAGES.map((p) => `<li><a href="${p.href}"${p.key === current ? ' aria-current="page"' : ""}>${p.label}</a></li>`).join("")}
           </ul>
-          <a class="circle-link" href="${CIRCLE_URL}">ている×ている ↗</a>
+          <a class="circle-link" href="${CIRCLE_URL}"><img src="../../images/logo.png" alt="ている×ている" width="400" height="140"></a>
         </nav>
       </div>`;
     const btn = el.querySelector(".menu-btn");
@@ -49,7 +49,7 @@
     el.innerHTML = `
       <div class="wrap">
         <div class="footer-head">
-          <div class="footer-mark">${esc(MEMBER.roman)}</div>
+          <img class="footer-mark" src="${HAND_NAME.src}" alt="${esc(MEMBER.roman)}" width="1500" height="416" loading="lazy">
           <a class="footer-logo" href="${CIRCLE_URL}"><img src="../../images/logo.png" alt="ている×ている" width="400" height="140"></a>
         </div>
         <div class="footer-grid">
@@ -259,15 +259,19 @@
       }
       if (next < plan.length) { requestAnimationFrame(frame); return; }
       svg.querySelector("image").removeAttribute("mask");
+      svg.nextElementSibling.classList.add("visible");
     })(performance.now());
   }
 
   function initTypewriter() {
     const h1 = document.querySelector(".hero-copy h1");
-    if (h1) h1.innerHTML = handNameHTML();
+    if (h1) h1.innerHTML = `${handNameHTML()}<span class="hand-roman" aria-hidden="true">${esc(MEMBER.roman)}</span>`;
 
     if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      if (h1) h1.querySelector("image").removeAttribute("mask");
+      if (h1) {
+        h1.querySelector("image").removeAttribute("mask");
+        h1.querySelector(".hand-roman").classList.add("visible");
+      }
       const leadEl = document.querySelector(".lead");
       if (leadEl) leadEl.innerHTML = MEMBER.lead.map(esc).join("<br>");
       const ul = document.querySelector(".hero-copy .circles");

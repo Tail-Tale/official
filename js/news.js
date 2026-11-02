@@ -1,4 +1,3 @@
-/* ===== news.js: ニュース一覧ページ ===== */
 
 const TAG_CLASS = {
   event:   'tag-event',
