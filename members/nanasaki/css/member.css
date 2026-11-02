@@ -335,8 +335,12 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .nnb-bnr-close:hover { color: var(--ink); }
 .nnb-bnr.hidden { display: none; }
 @media (max-width: 700px) {
-  .nnb-bnr { width: 290px; bottom: 38vh; right: 0.8rem; }
-  .nnb-bnr-img { width: 116px; }
+  .nnb-bnr { width: 210px; bottom: 38vh; right: 0.8rem; }
+  .nnb-bnr-img { width: 80px; }
+  .nnb-bnr-text { padding: 12px 10px; gap: 3px; }
+  .nnb-bnr-label { font-size: 0.65rem; }
+  .nnb-bnr-date { font-size: 0.78rem; }
+  .nnb-bnr-event { font-size: 0.75rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
