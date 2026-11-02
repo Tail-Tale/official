@@ -11,7 +11,8 @@ const MEMBER = {
   /* 所属：個人サークルと参加サークル。Works の絞り込みにも使います。listed: false はサークル一覧の表示から外す */
   circles: [
     { id: "nanabusaki", name: "ななぶさき", label: "個人サークル", role: "主宰" },
-    { id: "tail-tale", name: "ている×ている", label: "参加サークル", role: "イラスト・システム担当", url: "https://tail-tale.github.io/official/", listed: false }
+    { id: "tail-tale", name: "ている×ている", label: "参加サークル", role: "イラスト・システム担当", url: "https://tail-tale.github.io/official/", listed: false },
+    { id: "guest", name: "寄稿", label: "ゲスト参加", listed: false }
   ],
   avatar: "images/avatar.jpg",
   kv: "shared/illust89.jpg",
@@ -27,6 +28,71 @@ const MEMBER = {
 
 /* WORKS：作品。新しいものを上に書きます。circle は MEMBER.circles の id */
 const WORKS = [
+  {
+    id: "lian-fortuna",
+    circle: "guest",
+    title: "Lian Fortuna",
+    kana: "リアン・フォルトゥナ",
+    type: "合同誌（寄稿）",
+    year: "2025",
+    role: "寄稿（イラスト）",
+    image: null,
+    text: "ごちうさオールキャラ合同誌。コミックマーケット107にてゲスト参加しました。",
+    credits: "",
+    link: null
+  },
+  {
+    id: "stella-ensemble-3",
+    circle: "guest",
+    title: "StellaEnsemble 3+",
+    kana: "ステラアンサンブル3プラス",
+    type: "合同誌（寄稿）",
+    year: "2025",
+    role: "寄稿（イラスト）",
+    image: null,
+    text: "きゃべつそふと合同誌。コミックマーケット107にてゲスト参加しました。",
+    credits: "",
+    link: null
+  },
+  {
+    id: "stardust-owl",
+    circle: "guest",
+    title: "Stardust Owl",
+    kana: "スターダストアウル",
+    type: "合同誌（寄稿）",
+    year: "2025",
+    role: "寄稿（イラスト）",
+    image: null,
+    text: "篠澤広百人合同誌。学園スターフェスティバル02（2025.11.16）にてゲスト参加しました。",
+    credits: "",
+    link: null
+  },
+  {
+    id: "sunlite-score",
+    circle: "guest",
+    title: "SUNLITE SCORE",
+    kana: "サンライトスコア",
+    type: "合同誌（寄稿）",
+    year: "2025",
+    role: "寄稿（イラスト）",
+    image: null,
+    text: "倉本千奈合同誌。コミックマーケット106にてゲスト参加しました。",
+    credits: "",
+    link: null
+  },
+  {
+    id: "stella-ensemble-2",
+    circle: "guest",
+    title: "StellaEnsemble 2+",
+    kana: "ステラアンサンブル2プラス",
+    type: "合同誌（寄稿）",
+    year: "2025",
+    role: "寄稿（イラスト）",
+    image: null,
+    text: "きゃべつそふと合同誌。コミックマーケット106にてゲスト参加しました。",
+    credits: "",
+    link: null
+  },
   {
     id: "perseid",
     circle: "tail-tale",

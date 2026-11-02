@@ -89,7 +89,7 @@
   function indexRow(x, i, opts) {
     const c = circleOf(x.circle);
     const inner = `
-      ${opts.thumb ? `<span class="thumb"><img src="${esc(x.image)}" alt="" loading="lazy"></span>` : ""}
+      ${opts.thumb && x.image ? `<span class="thumb"><img src="${esc(x.image)}" alt="" loading="lazy"></span>` : ""}
       <span class="t">${esc(x.title)}${tentative(x.tentative)}
         ${x.kana ? `<small>${esc(x.kana)}</small>` : ""}
         <small class="sp"><span class="dot ${esc(c.id)}"></span>${esc(c.name)}</small>
@@ -363,7 +363,7 @@
       ov.innerHTML = `
         <button class="ov-close" type="button">Close ×</button>
         <article class="detail">
-          <div class="detail-img"><img src="${esc(x.image)}" alt="${esc(x.title)}"></div>
+          ${x.image ? `<div class="detail-img"><img src="${esc(x.image)}" alt="${esc(x.title)}"></div>` : ""}
           <div class="detail-body">
             <div class="meta"><span><span class="dot ${esc(c.id)}"></span>${esc(c.name)}</span><span>${esc(x.type)}</span><span class="num">${esc(x.year)}</span></div>
             <h2>${esc(x.title)}${tentative(x.tentative)}</h2>
