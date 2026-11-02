@@ -118,6 +118,58 @@
     });
   }
 
+  /* ===== ライトボックス共通 ===== */
+  const LIGHTBOX_HTML = `
+    <div class="overlay" hidden role="dialog" aria-modal="true" aria-label="イラストの拡大表示">
+      <span class="ov-count num"></span>
+      <button class="ov-close" type="button">Close ×</button>
+      <figure class="lb-figure"><img alt=""><figcaption></figcaption></figure>
+      <button class="ov-prev" type="button">← Prev</button>
+      <button class="ov-next" type="button">Next →</button>
+    </div>`;
+
+  function initLightbox(lb) {
+    const img = lb.querySelector("img");
+    const cap = lb.querySelector("figcaption");
+    const count = lb.querySelector(".ov-count");
+    let cur = 0, lastFocus = null;
+    function show(i) {
+      cur = (i + GALLERY.length) % GALLERY.length;
+      const x = GALLERY[cur];
+      img.src = x.src; img.alt = "";
+      cap.innerHTML = `<span class="num">No.${galleryNo(cur)}</span>`;
+      count.textContent = `${pad(cur + 1)} / ${pad(GALLERY.length)}`;
+    }
+    function open(i) {
+      lastFocus = document.activeElement;
+      show(i); lb.hidden = false;
+      document.body.style.overflow = "hidden";
+      lb.querySelector(".ov-close").focus();
+    }
+    function close() {
+      lb.hidden = true; document.body.style.overflow = "";
+      if (lastFocus) lastFocus.focus();
+    }
+    lb.querySelector(".ov-prev").addEventListener("click", (e) => { e.stopPropagation(); show(cur - 1); });
+    lb.querySelector(".ov-next").addEventListener("click", (e) => { e.stopPropagation(); show(cur + 1); });
+    lb.addEventListener("click", (e) => { if (e.target === lb || e.target.closest(".ov-close")) close(); });
+    document.addEventListener("keydown", (e) => {
+      if (lb.hidden) return;
+      if (e.key === "Escape") close();
+      if (e.key === "ArrowLeft") show(cur - 1);
+      if (e.key === "ArrowRight") show(cur + 1);
+    });
+    let sx = null;
+    lb.addEventListener("touchstart", (e) => { sx = e.touches[0].clientX; }, { passive: true });
+    lb.addEventListener("touchend", (e) => {
+      if (sx === null) return;
+      const dx = e.changedTouches[0].clientX - sx;
+      if (Math.abs(dx) > 50) show(cur + (dx < 0 ? 1 : -1));
+      sx = null;
+    });
+    return open;
+  }
+
   /* ===== TOP ===== */
   function renderTop() {
     const g = GALLERY.slice(0, 5);
@@ -147,10 +199,10 @@
 
       <section class="sec wrap" aria-label="Gallery">
         ${labelRow("h2", "Gallery", "イラスト", `<a class="side" href="gallery.html">View all →</a>`)}
-        <div class="g-feature">
-          ${g[0] ? `<a class="big reveal" href="gallery.html" aria-label="${esc(g[0].title)}"><img src="${esc(g[0].src)}" alt="${esc(g[0].title)}"><span class="cap num">No.${galleryNo(0)}</span></a>` : ""}
+        <div class="g-feature" id="top-gallery">
+          ${g[0] ? `<button type="button" class="big reveal" data-index="0" aria-label="No.${galleryNo(0)}を拡大"><img src="${esc(g[0].src)}" alt=""><span class="cap num">No.${galleryNo(0)}</span></button>` : ""}
           <div class="smalls">
-            ${g.slice(1).map((x, j) => `<a class="reveal" href="gallery.html" aria-label="${esc(x.title)}"><img src="${esc(x.src)}" alt="${esc(x.title)}" loading="lazy"><span class="cap num">No.${galleryNo(j + 1)}</span></a>`).join("")}
+            ${g.slice(1).map((x, j) => `<button type="button" class="reveal" data-index="${j + 1}" aria-label="No.${galleryNo(j + 1)}を拡大"><img src="${esc(x.src)}" alt="" loading="lazy"><span class="cap num">No.${galleryNo(j + 1)}</span></button>`).join("")}
           </div>
         </div>
       </section>
@@ -158,8 +210,13 @@
       <section class="sec wrap" id="profile" aria-label="Profile">
         ${labelRow("h2", "Profile", "プロフィール")}
         ${profileHTML()}
-      </section>`;
+      </section>
+      ${LIGHTBOX_HTML}`;
     initPeek(document.getElementById("top-index"));
+    const topLb = main.querySelector(".overlay");
+    topLb.id = "top-lightbox";
+    const openTopLb = initLightbox(topLb);
+    main.querySelectorAll("#top-gallery button[data-index]").forEach((b) => b.addEventListener("click", () => openTopLb(+b.dataset.index)));
     initTypewriter();
   }
 
@@ -351,58 +408,12 @@
             </button></li>`).join("")}
         </ul>
       </div>
-      <div class="overlay" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="イラストの拡大表示">
-        <span class="ov-count num"></span>
-        <button class="ov-close" type="button">Close ×</button>
-        <figure class="lb-figure"><img alt=""><figcaption></figcaption></figure>
-        <button class="ov-prev" type="button">← Prev</button>
-        <button class="ov-next" type="button">Next →</button>
-      </div>`;
+      ${LIGHTBOX_HTML}`;
 
-    const lb = document.getElementById("lightbox");
-    const img = lb.querySelector("img");
-    const cap = lb.querySelector("figcaption");
-    const count = lb.querySelector(".ov-count");
-    let cur = 0;
-    let lastFocus = null;
-    function show(i) {
-      cur = (i + GALLERY.length) % GALLERY.length;
-      const x = GALLERY[cur];
-      img.src = x.src;
-      img.alt = x.title;
-      cap.innerHTML = `${esc(x.title)}<span class="num">${esc(x.year)}</span>`;
-      count.textContent = `${pad(cur + 1)} / ${pad(GALLERY.length)}`;
-    }
-    function open(i) {
-      lastFocus = document.activeElement;
-      show(i);
-      lb.hidden = false;
-      document.body.style.overflow = "hidden";
-      lb.querySelector(".ov-close").focus();
-    }
-    function close() {
-      lb.hidden = true;
-      document.body.style.overflow = "";
-      if (lastFocus) lastFocus.focus();
-    }
-    main.querySelectorAll(".masonry button").forEach((b) => b.addEventListener("click", () => open(+b.dataset.index)));
-    lb.querySelector(".ov-prev").addEventListener("click", (e) => { e.stopPropagation(); show(cur - 1); });
-    lb.querySelector(".ov-next").addEventListener("click", (e) => { e.stopPropagation(); show(cur + 1); });
-    lb.addEventListener("click", (e) => { if (e.target === lb || e.target.closest(".ov-close")) close(); });
-    document.addEventListener("keydown", (e) => {
-      if (lb.hidden) return;
-      if (e.key === "Escape") close();
-      if (e.key === "ArrowLeft") show(cur - 1);
-      if (e.key === "ArrowRight") show(cur + 1);
-    });
-    let sx = null;
-    lb.addEventListener("touchstart", (e) => { sx = e.touches[0].clientX; }, { passive: true });
-    lb.addEventListener("touchend", (e) => {
-      if (sx === null) return;
-      const dx = e.changedTouches[0].clientX - sx;
-      if (Math.abs(dx) > 50) show(cur + (dx < 0 ? 1 : -1));
-      sx = null;
-    });
+    const lb = main.querySelector(".overlay");
+    lb.id = "lightbox";
+    const openLb = initLightbox(lb);
+    main.querySelectorAll(".masonry button").forEach((b) => b.addEventListener("click", () => openLb(+b.dataset.index)));
   }
 
   /* ===== ローディング（トップのみ。ページ内リンクで来たときは出さない） ===== */

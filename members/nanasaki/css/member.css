@@ -182,10 +182,10 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .g-feature { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 16px; margin-top: 32px; }
 .g-feature .big { aspect-ratio: 4 / 5; }
 .g-feature .smalls { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; align-content: start; }
-.g-feature .smalls a { aspect-ratio: 1; }
-.g-feature a { display: block; overflow: hidden; background: var(--bg-deep); position: relative; }
+.g-feature .smalls a, .g-feature .smalls button { aspect-ratio: 1; }
+.g-feature a, .g-feature button { display: block; overflow: hidden; background: var(--bg-deep); position: relative; cursor: pointer; }
 .g-feature img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s ease; }
-.g-feature a:hover img { transform: scale(1.04); }
+.g-feature a:hover img, .g-feature button:hover img { transform: scale(1.04); }
 .g-feature .cap { position: absolute; left: 12px; bottom: 10px; font-size: 0.66rem; color: var(--ink); background: rgba(247,248,250,0.85); padding: 1px 8px; }
 
 /* ===== Gallery ページ：縦横比を活かした段組み ===== */
