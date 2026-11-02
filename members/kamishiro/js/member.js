@@ -229,7 +229,9 @@
       if (!h1) return;
 
       // タイプ前に最終的な高さを測って確保（レイアウトシフト防止）
-      h1.innerHTML = esc(MEMBER.roman).replace(" ", "<span>") + "</span>";
+      const parts = MEMBER.roman.split(" ");
+      const first = parts[0], second = parts[1];
+      h1.innerHTML = second ? `${esc(first)}<span> ${esc(second)}</span>` : esc(first);
       h1.style.minHeight = h1.offsetHeight + "px";
       h1.innerHTML = "";
 
@@ -240,34 +242,38 @@
         leadEl.innerHTML = "";
       }
 
-      const [first, second] = MEMBER.roman.split(" ");
+      function afterH1Done() {
+        // 2. lead: 行ごとにタイプ
+        setTimeout(() => {
+          const leadEl = document.querySelector(".lead");
+          if (!leadEl) return;
+          let lineIdx = 0, charIdx = 0;
+          (function typeLead() {
+            if (lineIdx >= MEMBER.lead.length) {
+              const c = leadEl.closest(".hero-copy");
+              if (c) { const ul = c.querySelector(".circles"); if (ul) setTimeout(() => ul.classList.add("visible"), 200); }
+              return;
+            }
+            const line = MEMBER.lead[lineIdx];
+            if (charIdx === 0 && lineIdx > 0) leadEl.appendChild(document.createElement("br"));
+            if (charIdx < line.length) {
+              leadEl.appendChild(document.createTextNode(line[charIdx++]));
+              setTimeout(typeLead, 50);
+            } else { lineIdx++; charIdx = 0; setTimeout(typeLead, 200); }
+          })();
+        }, 200);
+      }
 
       typeText(h1, first, () => {
-        setTimeout(() => {
-          const span = document.createElement("span");
-          h1.appendChild(span);
-          typeText(span, " " + second, () => {
-            // 2. lead: 行ごとにタイプ
-            setTimeout(() => {
-              const leadEl = document.querySelector(".lead");
-              if (!leadEl) return;
-              let lineIdx = 0, charIdx = 0;
-              (function typeLead() {
-                if (lineIdx >= MEMBER.lead.length) {
-                  const c = leadEl.closest(".hero-copy");
-                  if (c) { const ul = c.querySelector(".circles"); if (ul) setTimeout(() => ul.classList.add("visible"), 200); }
-                  return;
-                }
-                const line = MEMBER.lead[lineIdx];
-                if (charIdx === 0 && lineIdx > 0) leadEl.appendChild(document.createElement("br"));
-                if (charIdx < line.length) {
-                  leadEl.appendChild(document.createTextNode(line[charIdx++]));
-                  setTimeout(typeLead, 50);
-                } else { lineIdx++; charIdx = 0; setTimeout(typeLead, 200); }
-              })();
-            }, 200);
-          });
-        }, 200);
+        if (second) {
+          setTimeout(() => {
+            const span = document.createElement("span");
+            h1.appendChild(span);
+            typeText(span, " " + second, afterH1Done);
+          }, 200);
+        } else {
+          afterH1Done();
+        }
       });
     }, 900);
   }
@@ -278,7 +284,7 @@
     return `
       <div class="profile">
         <div class="profile-side reveal">
-          <div class="avatar"><img src="${esc(MEMBER.avatar)}" alt="${esc(MEMBER.name)}"></div>
+          ${MEMBER.avatar ? `<div class="avatar"><img src="${esc(MEMBER.avatar)}" alt="${esc(MEMBER.name)}"></div>` : ""}
           <div class="name">${esc(MEMBER.name)}</div>
           <div class="roman en">${esc(MEMBER.roman)}</div>
         </div>
