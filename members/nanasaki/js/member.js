@@ -89,7 +89,7 @@
   function indexRow(x, i, opts) {
     const c = circleOf(x.circle);
     const inner = `
-      ${opts.thumb ? `<span class="thumb">${x.image ? `<img src="${esc(x.image)}" alt="" loading="lazy">` : ""}</span>` : ""}
+      ${opts.thumb ? `<span class="thumb">${x.image ? `<img src="${esc(x.image)}" alt="" loading="lazy">` : `<span class="thumb-noimg">NO<br>IMAGE</span>`}</span>` : ""}
       <span class="t">${esc(x.title)}${tentative(x.tentative)}
         ${x.kana ? `<small>${esc(x.kana)}</small>` : ""}
         <small class="sp"><span class="dot ${esc(c.id)}"></span>${esc(c.name)}</small>
