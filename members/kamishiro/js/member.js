@@ -520,24 +520,23 @@
 
     // Perseid. 本文から抽出した文字
     const src = "鬱蒼とした背の高い草をかき分け緩やかな斜面登っていく水平線が太陽飲み込んでから数時間経っているが未だに真昼灼熱面影残している涼しげ聞こえる虫音さえ今は多少慰めにもならない肌へばりつく汗拭い空見上げる茂りに茂った樹冠隙間から白く光星覗く危ないから子供だけで山に入ってはいけないと言われているそんな忠告など忘れただ夢中なってこんなところまでやってきたあの向こう側の星に用があった触れる感触かはたまた刺されたかむずむずとした感覚振り切るようにして一歩もう進むと突然開けた暑さと興奮ですっかり上気した体には湿気含んだぬるい風ですら心地よく感じるそこ広がっていたのは満天星空吸い込まれるような宵闇幾つも宝石ちりばめられている家窓越し夜空よりもずっとずっと綺麗で手伸ばせば届いてしまいそうなほど近くに煌めく見とれていると一本白線すうっと走っていったその線は二本三本と数を増していきやがて激しい雨のように降り注ぐわぁ思わず声漏れる本で見たような流星群写真とは全然違う目の前で次々と眩い引かれては消えていくそんな光景奪われつい来た本当理由忘れかけていた目的思い出すと慌てて装置取り出すおもちゃのトランシーバー小さなライトを針金でぐるぐる巻きつけたり最近拾った綺麗な石をくっつけたそれを耳当て同じく作ったアンテナ宙掲げるうちゅうじんさんきこえますかー大きな声で叫ぶ宇宙人と仲良くなりたいいつからか思い続けてきた夢まるで荒唐無稽な願いだが降る今夜なら叶う気がしてこんなところまでやってきたのだが無論どれだけ叫んでも夜空からの返事は沈黙のみだった流れ願いを叶えてくれることもなければそれに乗って宇宙人がやってくるなんておとぎ話のような事起こるはずがないのだ流星の雨脚落ち着いてきたころ諦めて掲げていたアンテナを下ろすその時だった装置付けた石がうっすら光っていることに気づいたそれに呼応するように夜空にひと際明るい星輝いたかと思えばその光弱くなり見間違いかと瞬きをしていると再び取り戻す浮かぶどの星より明るいそれは流星とも違ってその場で明滅続けているあれはきっとUFOに違いないやっと声が届いたんだ仕舞いかけていた装置をもう一度掲げUFOの明滅に合わせるようにライトの電源をオンオフするうちゅうじんさんですかきこえたらお返事ください返事が聞こえたいや正確には聞こえたのではない頭の中に直接ノイズ交じり音声流れ込んでくるきこえるそこにいるのそれに答えるように手振り上げて必死で上げるいるよここにいるきみはだあれこっちにおいでよいっしょにあそぼうわたしはごめんねいまはそっちにはいけないのでもいつかまたにくるからそのときはうんまってるだからもしまた会えたらきっとおともだちにうん必ず気づけば明滅する点は見えなくなっていた";
-    const chars = [...new Set(src)].filter(c => /\S/.test(c));
-
     const SIZE = 16;
-    let W, H, drops;
+    let W, H, drops, charPos;
 
     function resize() {
       W = canvas.width = wrap.offsetWidth;
       H = canvas.height = wrap.offsetHeight;
       const cols = Math.floor(W / SIZE);
       drops = Array.from({ length: cols }, () => -(Math.random() * (H / SIZE) | 0));
-      ctx.fillStyle = "#1c1b24";
+      charPos = Array.from({ length: cols }, (_, i) => Math.floor(i * src.length / cols));
+      ctx.fillStyle = "#f7f8fa";
       ctx.fillRect(0, 0, W, H);
     }
     resize();
     window.addEventListener("resize", resize, { passive: true });
 
     function step() {
-      ctx.fillStyle = "rgba(28,27,36,0.06)";
+      ctx.fillStyle = "rgba(247,248,250,0.10)";
       ctx.fillRect(0, 0, W, H);
       ctx.font = `${SIZE}px "Zen Kaku Gothic New","Hiragino Sans",monospace`;
       for (let i = 0; i < drops.length; i++) {
@@ -545,8 +544,8 @@
         if (y < 0) { drops[i] += 0.4; continue; }
         const yPx = (y | 0) * SIZE;
         if (yPx < H) {
-          ctx.fillStyle = "rgba(255,255,255,0.92)";
-          ctx.fillText(chars[Math.random() * chars.length | 0], i * SIZE, yPx);
+          ctx.fillStyle = "rgba(38,37,45,0.88)";
+          ctx.fillText(src[charPos[i]++ % src.length], i * SIZE, yPx);
         }
         drops[i] += 0.4;
         if (drops[i] * SIZE > H + SIZE && Math.random() > 0.98) {
