@@ -530,7 +530,8 @@
         x: spacing * (i + 0.15 + Math.random() * 0.7),
         y: -(Math.random() * (H / SIZE)),
         ci: Math.floor(i * src.length / COUNT),
-        speed: 0.12 + Math.random() * 0.06
+        speed: 0.12 + Math.random() * 0.06,
+        lastRow: -1
       }));
     }
 
@@ -550,10 +551,12 @@
       ctx.font = `${SIZE}px "Zen Kaku Gothic New","Hiragino Sans",monospace`;
       for (const s of streams) {
         if (s.y < 0) { s.y += s.speed; continue; }
-        const yPx = (s.y | 0) * SIZE;
-        if (yPx < H) {
+        const row = s.y | 0;
+        const yPx = row * SIZE;
+        if (yPx < H && row !== s.lastRow) {
           ctx.fillStyle = "rgba(38,37,45,0.9)";
           ctx.fillText(src[s.ci++ % src.length], s.x, yPx);
+          s.lastRow = row;
         }
         s.y += s.speed;
         if (s.y * SIZE > H + SIZE && Math.random() > 0.985) {
