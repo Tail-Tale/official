@@ -374,10 +374,10 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   .hero-art { grid-column: 1 / -1; aspect-ratio: 4 / 5; max-height: 72vh; border-right: 0; border-bottom: 1px solid var(--line); }
   .hero-copy { padding: 32px 24px 36px; }
   .hero-name { font-size: 1.15rem; padding: 24px 0; }
-  .hero.hero-canvas { grid-template-columns: minmax(0, 1fr) 56px; }
+  .hero.hero-canvas { grid-template-columns: minmax(0, 1fr) 56px; grid-template-rows: auto 1fr; height: calc(100vh - var(--header-h) - env(safe-area-inset-top, 0px)); }
   .hero.hero-canvas .hero-copy { grid-column: 1; grid-row: 1; border-right: 1px solid var(--line); }
   .hero.hero-canvas .hero-name { grid-column: 2; grid-row: 1; }
-  .hero.hero-canvas .hero-art  { grid-column: 1 / -1; grid-row: 2; aspect-ratio: 3 / 2; max-height: 50vh; }
+  .hero.hero-canvas .hero-art  { grid-column: 1 / -1; grid-row: 2; aspect-ratio: unset; max-height: none; }
 
   .index-row > a, .index-row > button { grid-template-columns: minmax(0, 1fr) 52px; gap: 12px; }
   .index-row .c, .index-row .k { display: none; }
