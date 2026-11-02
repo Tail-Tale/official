@@ -190,6 +190,17 @@
         <div class="hero-name" aria-hidden="true">${esc(MEMBER.name)}<small>${esc(MEMBER.kana)}</small></div>
       </section>
 
+      <a class="nnb-inline" href="https://x.com/nanasaki_sub/status/2107063255373885559" target="_blank" rel="noopener" aria-label="ななぶさき 名探偵プリキュア あんみく漫画本">
+        <div class="nnb-inline-text">
+          <p class="nnb-bnr-label">参加予定イベント</p>
+          <p class="nnb-bnr-date">2026.01.16</p>
+          <p class="nnb-bnr-event">レインボーフレーバー37</p>
+        </div>
+        <div class="nnb-inline-img">
+          <img src="images/nanabusaki_bnr.webp" alt="ななぶさき 名探偵プリキュア あんみく漫画本" loading="lazy">
+        </div>
+      </a>
+
       <section class="sec wrap" aria-label="Works">
         ${labelRow("h2", "Works", "作品目録", `<a class="side" href="works.html">View all →</a>`)}
         <ol class="index top-works-scroll" id="top-index">
