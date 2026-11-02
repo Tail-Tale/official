@@ -293,7 +293,6 @@
         <div class="profile-main">
           <div class="bio reveal">${P.bio.map((t) => `<p>${esc(t)}</p>`).join("")}</div>
           <dl class="facts">
-            <div class="fact reveal"><dt>Circles<small>サークル</small></dt><dd>${circlesList()}</dd></div>
             <div class="fact reveal"><dt>History<small>活動歴</small></dt><dd>
               <ol class="history">${P.history.map((h) => `<li><span class="num">${esc(h.date)}</span><span>${esc(h.text)}${tentative(h.tentative)}</span></li>`).join("")}</ol>
             </dd></div>
