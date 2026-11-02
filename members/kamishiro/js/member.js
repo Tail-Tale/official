@@ -536,24 +536,24 @@
     window.addEventListener("resize", resize, { passive: true });
 
     function step() {
-      ctx.fillStyle = "rgba(247,248,250,0.10)";
+      ctx.fillStyle = "rgba(247,248,250,0.03)";
       ctx.fillRect(0, 0, W, H);
       ctx.font = `${SIZE}px "Zen Kaku Gothic New","Hiragino Sans",monospace`;
       for (let i = 0; i < drops.length; i++) {
         const y = drops[i];
-        if (y < 0) { drops[i] += 0.4; continue; }
+        if (y < 0) { drops[i] += 0.2; continue; }
         const yPx = (y | 0) * SIZE;
         if (yPx < H) {
           ctx.fillStyle = "rgba(38,37,45,0.88)";
           ctx.fillText(src[charPos[i]++ % src.length], i * SIZE, yPx);
         }
-        drops[i] += 0.4;
+        drops[i] += 0.2;
         if (drops[i] * SIZE > H + SIZE && Math.random() > 0.98) {
           drops[i] = -(Math.random() * 20 | 0);
         }
       }
     }
-    setInterval(step, 55);
+    setInterval(step, 50);
   }
 
   renderHeader();
