@@ -1,14 +1,9 @@
-/**
- * 七咲凪 メンバーページ データ
- * 作品やイラストを追加するときは、このファイルだけ編集してください。
- * 画像は images/ フォルダに置き、ファイル名を src に書きます。
- */
 const MEMBER = {
   name: "七咲凪",
   kana: "ななさきなぎ",
   roman: "Nanasaki Nagi",
   role: "イラスト・システム",
-  /* 所属：個人サークルと参加サークル。Works の絞り込みにも使います。listed: false はサークル一覧の表示から外す */
+  // listed: false はサークル一覧に出さない
   circles: [
     { id: "nanabusaki", name: "ななぶさき", label: "個人サークル", role: "主宰" },
     { id: "tail-tale", name: "ている×ている", label: "参加サークル", role: "イラスト・システム担当", url: "https://tail-tale.github.io/official/", listed: false },
@@ -16,7 +11,6 @@ const MEMBER = {
   ],
   avatar: "images/avatar.jpg",
   kv: "shared/illust89.jpg",
-  kvCaption: "",
   kicker: "Illustration & System",
   lead: ["淡い色彩とやわらかい線で、", "日常の中のちいさなきらめきを描く。"],
   links: [
@@ -26,7 +20,7 @@ const MEMBER = {
   ]
 };
 
-/* WORKS：新しいものを上に（発行日順） */
+// 新しい順
 const WORKS = [
   {
     id: "perseid",
@@ -52,8 +46,7 @@ const WORKS = [
     image: "images/yukiyume.webp",
     text: "コミックマーケット107にて頒布。",
     credits: "",
-    link: null,
-    tentative: false
+    link: null
   },
   {
     id: "tail-by-tale",
@@ -118,8 +111,7 @@ const WORKS = [
     image: "images/sakuawayuki.webp",
     text: "コミックマーケット106にて頒布。C106初回版。",
     credits: "",
-    link: null,
-    tentative: false
+    link: null
   },
   {
     id: "sunlite-score",
@@ -158,12 +150,11 @@ const WORKS = [
     image: "images/ashiato.webp",
     text: "学園アイドルマスター ひろ＆ちな 非公式ファンブック。\n学園スターフェスティバル01にて頒布。",
     credits: "",
-    link: null,
-    tentative: false
+    link: null
   }
 ];
 
-/* GALLERY：イラスト。新しいものを上に書きます */
+// 新しい順
 const GALLERY = [
   { src: "images/illust8.webp" },
   { src: "images/HTAdqSLagAA6Mi8.webp" },
@@ -182,26 +173,24 @@ const GALLERY = [
   { src: "images/GUiE0BxWsAAzsj_.webp" }
 ];
 
-/* PROFILE：tentative が true の項目は「仮」の印が付きます */
 const PROFILE = {
   bio: [
     "個人サークル「ななぶさき」で創作をしながら、同人サークル「ている×ている」ではイラストとシステムを担当しています。",
     "淡い色彩とやわらかい線で、日常の中のちいさなきらめきを描くのが好きです。ノベルゲーム『Perseid.』では企画とシステムを手がけ、絵とプログラムの両方から作品づくりに関わっています。"
   ],
   history: [
-    { date: "2026.10", text: "新作ノベルゲーム『Perseid.』を発表（企画・システム）", tentative: false },
-    { date: "2026.04", text: "ごちうさWEBオンリー『てくてくうさぎの通り道』を主催", tentative: false },
-    { date: "2026.02", text: "サークルホームページを公開（システム）", tentative: false },
-    { date: "2025.12", text: "コミックマーケット107 に参加、『ゆき、ゆめ、あるいは花』を発行（ななぶさき）／イラスト集『ているばいている -Tail by Tale-』を発行（ている×ている）", tentative: false },
-    { date: "2025.08", text: "コミックマーケット106 に参加、『咲く淡雪に添えて』を発行（ななぶさき）", tentative: false },
-    { date: "2025.06", text: "学園スターフェスティバル01 に参加、『あしあとに咲くふたつ』を発行（ななぶさき）", tentative: false },
-    { date: "2025",    text: "サークル「ている×ている」の活動を開始", tentative: false },
-    { date: "—",       text: "個人サークル「ななぶさき」として活動を開始", tentative: false }
+    { date: "2026.10", text: "新作ノベルゲーム『Perseid.』を発表（企画・システム）" },
+    { date: "2026.04", text: "ごちうさWEBオンリー『てくてくうさぎの通り道』を主催" },
+    { date: "2026.02", text: "サークルホームページを公開（システム）" },
+    { date: "2025.12", text: "コミックマーケット107 に参加、『ゆき、ゆめ、あるいは花』を発行（ななぶさき）／イラスト集『ているばいている -Tail by Tale-』を発行（ている×ている）" },
+    { date: "2025.08", text: "コミックマーケット106 に参加、『咲く淡雪に添えて』を発行（ななぶさき）" },
+    { date: "2025.06", text: "学園スターフェスティバル01 に参加、『あしあとに咲くふたつ』を発行（ななぶさき）" },
+    { date: "2025",    text: "サークル「ている×ている」の活動を開始" },
+    { date: "—",       text: "個人サークル「ななぶさき」として活動を開始" }
   ],
   commission: {
-    tentative: false,
     text: "イラストのご依頼はSkebで受け付けています。受付状況はSkebのページでご確認ください。その他のご相談はXのDMへどうぞ。",
     link: { label: "Skebを見る", url: "https://skeb.jp/@nanasaki_sub" }
   },
-  tools: { tentative: false, items: ["CLIP STUDIO PAINT EX", "GAOMON 液タブ PD2200 21.5インチ", "iPad Pro 12.9インチ / Apple Pencil"] }
+  tools: { items: ["CLIP STUDIO PAINT EX", "GAOMON 液タブ PD2200 21.5インチ", "iPad Pro 12.9インチ / Apple Pencil"] }
 };

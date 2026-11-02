@@ -1,7 +1,3 @@
-/**
- * かみしろ メンバーページ データ
- * 作品やプロフィールを更新するときは、このファイルだけ編集してください。
- */
 const MEMBER = {
   name: "かみしろ",
   kana: "かみしろ",
@@ -12,7 +8,6 @@ const MEMBER = {
   ],
   avatar: "images/avatar.webp",
   kv: null,
-  kvCaption: "",
   kicker: "Scenario",
   lead: ["泣きゲーとチルい雰囲気ゲーが好き。", "弱すぎず強すぎない特殊能力が欲しい。"],
   links: [
@@ -20,7 +15,7 @@ const MEMBER = {
   ]
 };
 
-/* WORKS：新しいものを上に */
+// 新しい順
 const WORKS = [
   {
     id: "perseid",
@@ -37,18 +32,16 @@ const WORKS = [
   }
 ];
 
-/* GALLERY：イラストなし */
 const GALLERY = [];
 
-/* PROFILE */
 const PROFILE = {
   bio: [
     "同人サークル「ている×ている」でシナリオを担当しています。",
     "泣きゲーとチルい雰囲気ゲーが好き。弱すぎず強すぎない特殊能力が欲しい。"
   ],
   history: [
-    { date: "2026.03", text: "新作ノベルゲーム『Perseid.』を発表（シナリオ）", tentative: false },
-    { date: "2025",    text: "サークル「ている×ている」の活動を開始", tentative: false }
+    { date: "2026.03", text: "新作ノベルゲーム『Perseid.』を発表（シナリオ）" },
+    { date: "2025",    text: "サークル「ている×ている」の活動を開始" }
   ],
   commission: null,
   tools: null

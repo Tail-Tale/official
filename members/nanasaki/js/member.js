@@ -1,7 +1,3 @@
-/**
- * メンバーページ共通スクリプト（案A「雪明かり」）
- * ヘッダー・フッター・各ページの中身を member-data.js から組み立てます。
- */
 (function () {
   const CIRCLE_URL = "https://tail-tale.github.io/official/";
   const PAGES = [
@@ -16,12 +12,9 @@
 
   const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const pad = (n) => String(n).padStart(2, "0");
-  const tentative = (on) => (on ? '<span class="tentative">仮</span>' : "");
   const circleOf = (id) => (MEMBER.circles || []).find((c) => c.id === id) || { id: "", name: "" };
-  const workNo = (i) => pad(WORKS.length - i); // 古いものから 01
   const galleryNo = (i) => pad(GALLERY.length - i);
 
-  /* ===== ヘッダー ===== */
   function renderHeader() {
     const el = document.getElementById("site-header");
     if (!el) return;
@@ -49,7 +42,6 @@
     document.addEventListener("keydown", (e) => { if (e.key === "Escape" && el.classList.contains("menu-open")) setOpen(false); });
   }
 
-  /* ===== フッター ===== */
   function renderFooter() {
     const el = document.getElementById("site-footer");
     if (!el) return;
@@ -73,7 +65,6 @@
       </div>`;
   }
 
-  /* ===== 共通パーツ ===== */
   const labelRow = (tag, en, jp, side) => `
     <div class="label-row">
       <${tag} class="reveal"><span class="tw-target">${en}</span><small>${jp}</small></${tag}>
@@ -90,7 +81,7 @@
     const c = circleOf(x.circle);
     const inner = `
       ${opts.thumb ? `<span class="thumb">${x.image ? `<img src="${esc(x.image)}" alt="" loading="lazy">` : `<span class="thumb-noimg">NO<br>IMAGE</span>`}</span>` : ""}
-      <span class="t">${esc(x.title)}${tentative(x.tentative)}
+      <span class="t">${esc(x.title)}
         ${x.kana ? `<small>${esc(x.kana)}</small>` : ""}
         <small class="sp"><span class="dot ${esc(c.id)}"></span>${esc(c.name)}</small>
       </span>
@@ -102,7 +93,6 @@
       : `<li class="index-row row-stagger"><a href="works.html#${esc(x.id)}" data-img="${esc(x.image)}">${inner}</a></li>`;
   }
 
-  /* 行に触れたとき、カーソル近くに作品画像を浮かべる（マウス操作のときだけ） */
   function initPeek(scope) {
     if (!scope || !matchMedia("(hover: hover) and (pointer: fine)").matches) return;
     const peek = document.createElement("div");
@@ -118,7 +108,6 @@
     });
   }
 
-  /* ===== ライトボックス共通 ===== */
   const LIGHTBOX_HTML = `
     <div class="overlay" hidden role="dialog" aria-modal="true" aria-label="イラストの拡大表示">
       <span class="ov-count num"></span>
@@ -170,14 +159,12 @@
     return open;
   }
 
-  /* ===== TOP ===== */
   function renderTop() {
     const g = GALLERY.slice(0, 5);
     main.innerHTML = `
       <section class="hero" aria-label="${esc(MEMBER.name)}">
         <div class="hero-art">
           <img src="${esc(MEMBER.kv)}" alt="${esc(MEMBER.name)}のイラスト">
-          ${MEMBER.kvCaption ? `<span class="note">${esc(MEMBER.kvCaption)}</span>` : ""}
         </div>
         <div class="hero-copy">
           <div class="kicker en">${esc(MEMBER.kicker)}</div>
@@ -231,7 +218,6 @@
     initTypewriter();
   }
 
-  /* ===== タイプライター ===== */
   function initTypewriter() {
     if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
       const h1 = document.querySelector(".hero-copy h1");
@@ -256,7 +242,6 @@
     }
 
     setTimeout(() => {
-      // 1. h1: "Nanasaki" → pause → span " Nagi"
       const h1 = document.querySelector(".hero-copy h1");
       if (!h1) return;
 
@@ -279,7 +264,6 @@
           const span = document.createElement("span");
           h1.appendChild(span);
           typeText(span, " " + second, () => {
-            // 2. lead: 行ごとにタイプ
             setTimeout(() => {
               const leadEl = document.querySelector(".lead");
               if (!leadEl) return;
@@ -304,7 +288,6 @@
     }, 900);
   }
 
-  /* ===== PROFILE（トップに掲載） ===== */
   function profileHTML() {
     const P = PROFILE;
     return `
@@ -319,14 +302,14 @@
           <dl class="facts">
             <div class="fact reveal"><dt>Circles<small>サークル</small></dt><dd>${circlesList()}</dd></div>
             <div class="fact reveal"><dt>History<small>活動歴</small></dt><dd>
-              <ol class="history">${P.history.map((h) => `<li><span class="num">${esc(h.date)}</span><span>${esc(h.text)}${tentative(h.tentative)}</span></li>`).join("")}</ol>
+              <ol class="history">${P.history.map((h) => `<li><span class="num">${esc(h.date)}</span><span>${esc(h.text)}</span></li>`).join("")}</ol>
             </dd></div>
             <div class="fact reveal"><dt>Commission<small>ご依頼について</small></dt><dd>
-              <p>${esc(P.commission.text)}${tentative(P.commission.tentative)}</p>
+              <p>${esc(P.commission.text)}</p>
               ${P.commission.link ? `<a class="text-link" href="${esc(P.commission.link.url)}" target="_blank" rel="noopener">${esc(P.commission.link.label)} →</a>` : ""}
             </dd></div>
             <div class="fact reveal"><dt>Tools<small>使用ツール</small></dt><dd>
-              <ul class="inline-list">${P.tools.items.map((t) => `<li>${esc(t)}</li>`).join("")}</ul>${tentative(P.tools.tentative)}
+              <ul class="inline-list">${P.tools.items.map((t) => `<li>${esc(t)}</li>`).join("")}</ul>
             </dd></div>
             <div class="fact reveal"><dt>Links<small>リンク</small></dt><dd>
               <ul class="inline-list links">${MEMBER.links.map((l) => `<li><a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)}</a><span class="num">${esc(l.handle)}</span></li>`).join("")}</ul>
@@ -336,7 +319,6 @@
       </div>`;
   }
 
-  /* ===== WORKS ===== */
   function renderWorks() {
     const counts = { all: WORKS.length };
     WORKS.forEach((x) => { counts[x.circle] = (counts[x.circle] || 0) + 1; });
@@ -377,7 +359,7 @@
           ${x.image ? `<div class="detail-img"><img src="${esc(x.image)}" alt="${esc(x.title)}"></div>` : ""}
           <div class="detail-body">
             <div class="meta"><span><span class="dot ${esc(c.id)}"></span>${esc(c.name)}</span><span>${esc(x.type)}</span><span class="num">${esc(x.year)}</span></div>
-            <h2>${esc(x.title)}${tentative(x.tentative)}</h2>
+            <h2>${esc(x.title)}</h2>
             ${x.kana ? `<div class="kana">${esc(x.kana)}</div>` : ""}
             <dl>
               ${x.role ? `<div><dt>Role</dt><dd>${esc(x.role)}</dd></div>` : ""}
@@ -404,7 +386,6 @@
     if (idx >= 0) open(idx);
   }
 
-  /* ===== GALLERY ===== */
   function renderGallery() {
     main.innerHTML = `
       <div class="wrap page-intro">
@@ -413,9 +394,9 @@
       <div class="wrap sec" style="padding-top:0">
         <ul class="masonry">
           ${GALLERY.map((x, i) => `
-            <li class="reveal"><button type="button" data-index="${i}" aria-label="${esc(x.title)}を拡大">
-              <div class="img"><img src="${esc(x.src)}" alt="${esc(x.title)}" loading="lazy"></div>
-              <div class="cap"><span class="num">No.${galleryNo(i)}</span><span class="num">${esc(x.year)}</span></div>
+            <li class="reveal"><button type="button" data-index="${i}" aria-label="No.${galleryNo(i)}を拡大">
+              <div class="img"><img src="${esc(x.src)}" alt="" loading="lazy"></div>
+              <div class="cap"><span class="num">No.${galleryNo(i)}</span></div>
             </button></li>`).join("")}
         </ul>
       </div>
@@ -427,7 +408,6 @@
     main.querySelectorAll(".masonry button").forEach((b) => b.addEventListener("click", () => openLb(+b.dataset.index)));
   }
 
-  /* ===== ローディング（トップのみ。ページ内リンクで来たときは出さない） ===== */
   function initLoading() {
     const screen = document.getElementById("loading");
     const bar = document.getElementById("loading-bar");
@@ -448,7 +428,6 @@
     setTimeout(done, 2500);
   }
 
-  /* ===== スクロール表示：読み込み時に画面外にある要素だけ、表示時にふわっと出す ===== */
   function initReveal() {
     if (!("IntersectionObserver" in window) || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const els = [...document.querySelectorAll(".reveal")].filter((el) => el.getBoundingClientRect().top > window.innerHeight);
@@ -460,7 +439,6 @@
     els.forEach((el) => { el.classList.add("pre-reveal"); io.observe(el); });
   }
 
-  /* ===== セクション見出しタイプライター ===== */
   function initLabelTypewriters() {
     if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const targets = [...document.querySelectorAll(".tw-target")];
@@ -498,7 +476,6 @@
     });
   }
 
-  /* ===== ラベル下線アニメーション ===== */
   function initLabelUnderlines() {
     if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
       document.querySelectorAll(".label-row").forEach((el) => el.classList.add("line-drawn"));
@@ -512,7 +489,6 @@
     document.querySelectorAll(".label-row").forEach((el) => io.observe(el));
   }
 
-  /* ===== Worksリスト スタッガーフェードイン ===== */
   function initRowReveal() {
     if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
       document.querySelectorAll(".row-stagger").forEach((el) => el.classList.add("row-animated"));
@@ -531,7 +507,6 @@
     });
   }
 
-  /* ===== ななぶさきバナー ===== */
   function initNanabBanner() {
     const bnr = document.createElement("a");
     bnr.id = "nnbBnr";
