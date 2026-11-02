@@ -189,12 +189,12 @@ const PROFILE = {
     "淡い色彩とやわらかい線で、日常の中のちいさなきらめきを描くのが好きです。ノベルゲーム『Perseid.』では企画とシステムを手がけ、絵とプログラムの両方から作品づくりに関わっています。"
   ],
   history: [
+    { date: "2026.04", text: "ごちうさWEBオンリー『てくてくうさぎの通り道』を主催", tentative: false },
     { date: "2026.03", text: "新作ノベルゲーム『Perseid.』を発表（企画・システム）", tentative: false },
     { date: "2026.02", text: "サークルホームページを公開（システム）", tentative: false },
     { date: "2025.12", text: "コミックマーケット107 に参加、『ゆき、ゆめ、あるいは花』を発行（ななぶさき）／イラスト集『ているばいている -Tail by Tale-』を発行（ている×ている）", tentative: false },
     { date: "2025.08", text: "コミックマーケット106 に参加、『咲く淡雪に添えて』を発行（ななぶさき）", tentative: false },
     { date: "2025.06", text: "学園スターフェスティバル01 に参加、『あしあとに咲くふたつ』を発行（ななぶさき）", tentative: false },
-    { date: "2025.04", text: "ごちうさWEBオンリー『てくてくうさぎの通り道』を主催", tentative: false },
     { date: "2025",    text: "サークル「ている×ている」の活動を開始", tentative: false },
     { date: "—",       text: "個人サークル「ななぶさき」として活動を開始", tentative: false }
   ],
