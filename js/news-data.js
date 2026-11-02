@@ -5,7 +5,7 @@
 const NEWS_DATA = [
   {
     id: "perseid-announce-2026",
-    date: "2026.03.14",
+    date: "2026.10.10",
     tag: "release",
     tagLabel: "新作",
     title: "新作ノベルゲーム『Perseid.』発表",
