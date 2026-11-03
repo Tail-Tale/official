@@ -25,6 +25,7 @@ body {
   min-height: 100vh;
 }
 
+/* ダークモード */
 @media (prefers-color-scheme: dark) {
   html, body { background-color: #fdf8f5 !important; color: #2a1f1a !important; }
   .site-nav  { background-color: rgba(253,248,245,0.96) !important; }

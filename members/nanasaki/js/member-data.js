@@ -19,6 +19,7 @@ const MEMBER = {
   ]
 };
 
+// 下線はあとで自分で描くかも
 const HAND_NAME = {
   src: "images/name-hand.webp",
   box: [15, 505, 1945, 540],

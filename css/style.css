@@ -1,4 +1,5 @@
 :root {
+  /* サークルカラー ピンクとオレンジ */
   --pink: #f9a8c9;
   --pink-light: #fce4f0;
   --pink-dark: #e8749f;
@@ -160,6 +161,7 @@ nav.scrolled .nav-links a:hover {
   height: 32px;
   width: auto;
   display: block;
+  /* 写真の上だと白の方が見やすい */
   filter: brightness(0) invert(1) drop-shadow(0 1px 6px rgba(0,0,0,0.4));
   transition: filter 0.4s;
 }
@@ -779,6 +781,7 @@ footer {
   animation: loadFadeIn 0.5s 0.6s forwards;
 }
 
+/* ここからスマホ */
 @media (max-width: 1024px) {
   #sec-top {
     grid-template-columns: 1fr;

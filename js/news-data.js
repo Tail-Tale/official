@@ -1,4 +1,6 @@
+// news.json と両方更新するの忘れない！
 const NEWS_DATA = [
+  // 新しいのは上に足す
   {
     id: "perseid-announce-2026",
     date: "2026.10.10",

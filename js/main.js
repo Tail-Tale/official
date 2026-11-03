@@ -93,7 +93,9 @@ function initLoading() {
     if (document.readyState === 'complete') resolve();
     else window.addEventListener('load', resolve, { once: true });
   });
+  // 一瞬は微妙なので下限あり
   const minWait = new Promise(resolve => setTimeout(resolve, 900));
+  // 回線遅い人向け、6秒で諦める
   const giveUp = new Promise(resolve => setTimeout(resolve, 6000));
 
   Promise.race([Promise.all([loaded, minWait]), giveUp]).then(() => {
@@ -106,6 +108,7 @@ function renderTopNews(news) {
   const list = document.getElementById('top-news-list');
   if (!list) return;
   list.innerHTML = '';
+  // 5件だと多かったので3件に
   news.slice(0, 3).forEach(item => {
     const a = document.createElement('a');
     a.className = 'top-news-entry';
@@ -201,5 +204,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
   window.addEventListener('scroll', checkVisible);
+  // これないと最初のやつが出てこなかった
   setTimeout(checkVisible, 1000);
 })();

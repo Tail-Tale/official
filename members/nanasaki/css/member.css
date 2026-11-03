@@ -114,6 +114,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   border-bottom: 1px solid var(--line);
 }
 .hero-art { position: relative; border-right: 1px solid var(--line); overflow: hidden; background: var(--bg-deep); }
+/* ゆっくりズーム */
 .hero-art img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; animation: ken-burns 14s ease-out forwards; }
 .hero-copy { padding: 48px 44px 44px; display: flex; flex-direction: column; justify-content: space-between; gap: 40px; min-width: 0; overflow: hidden; }
 .hero-copy .kicker { font-size: 0.7rem; color: var(--ice); opacity: 0; animation: fade-up 0.7s ease 0.8s forwards; }
@@ -250,6 +251,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .footer-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px 40px; }
 .footer-mark { width: min(100%, 280px); height: auto; transform: rotate(-3deg); }
 .footer-logo { flex-shrink: 0; }
+/* 白ロゴしかないので黒くしてる */
 .footer-logo img { width: 170px; height: auto; filter: brightness(0); opacity: 0.8; transition: opacity 0.3s; }
 .footer-logo:hover img { opacity: 1; }
 .footer-grid { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 28px; margin-top: 36px; }
@@ -332,6 +334,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 }
 .nnb-bnr-close:hover { color: var(--ink); }
 .nnb-bnr.hidden { display: none; }
+/* ノートPCだとバナーがでかすぎたので小さく */
 @media (max-width: 1420px), (max-height: 820px) {
   .nnb-bnr { width: 270px; }
   .nnb-bnr-body { height: 104px; }
@@ -340,6 +343,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   .nnb-bnr-img img { object-position: center 80%; }
 }
 @media (max-width: 1240px) {
+  /* ここまで狭いと右下は邪魔 */
   .nnb-bnr { display: none !important; }
   .nnb-inline { display: flex; }
 }
@@ -354,6 +358,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 }
 
 @media (max-width: 900px) {
+  /* ぼかしあるとメニューが変になった */
   .site-header { backdrop-filter: none; -webkit-backdrop-filter: none; background: var(--bg); }
   .menu-btn { display: block; }
   .gnav {

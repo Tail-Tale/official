@@ -183,6 +183,7 @@
       <a class="nnb-inline" href="https://x.com/nanasaki_sub/status/2107063255373885559" target="_blank" rel="noopener" aria-label="ななぶさき 名探偵プリキュア あんみく漫画本">
         <div class="nnb-inline-text">
           <p class="nnb-bnr-label">参加予定イベント</p>
+          <!-- イベント終わったら差し替える -->
           <p class="nnb-bnr-date">2027.01.16</p>
           <p class="nnb-bnr-event">レインボーフレーバー37</p>
         </div>
@@ -485,6 +486,7 @@
       (function type() {
         if (cancelled || i >= text.length) return;
         el.appendChild(document.createTextNode(text[i++]));
+        // 速すぎると読めない
         setTimeout(type, 90);
       })();
     }
