@@ -3,7 +3,6 @@ const MEMBER = {
   kana: "ななさきなぎ",
   roman: "Nanasaki Nagi",
   role: "イラスト・システム",
-  // listed: false はサークル一覧に出さない
   circles: [
     { id: "nanabusaki", name: "ななぶさき", label: "個人サークル", role: "主宰" },
     { id: "tail-tale", name: "ている×ている", label: "参加サークル", role: "イラスト・システム担当", url: "https://tail-tale.github.io/official/", listed: false },

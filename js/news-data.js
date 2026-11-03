@@ -1,7 +1,3 @@
-/**
- * ニュースデータ
- * news.json と同じ内容を保持してください。
- */
 const NEWS_DATA = [
   {
     id: "perseid-announce-2026",

@@ -131,7 +131,6 @@ function initLightbox() {
   const lbImg = document.getElementById('lightbox-img');
   if (!lb || !lbImg) return;
 
-  // リンク付きカードはリンク先へ遷移させるため拡大表示しない
   document.querySelectorAll('div.work-card img').forEach(img => {
     img.style.cursor = 'zoom-in';
     img.addEventListener('click', (e) => {
@@ -195,6 +194,5 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
   window.addEventListener('scroll', checkVisible);
-  // 初回は少し遅らせて表示
   setTimeout(checkVisible, 1000);
 })();
