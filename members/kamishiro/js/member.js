@@ -487,6 +487,7 @@
 
   function initHeroCanvas() {
     if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    // マトリックス的な演出
     const wrap = document.getElementById("hero-canvas-wrap");
     if (!wrap) return;
 

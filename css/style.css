@@ -767,7 +767,7 @@ footer {
   background: linear-gradient(90deg, var(--pink), var(--orange));
   border-radius: 2px;
   width: 0%;
-  transition: width 0.05s linear;
+  transition: width 0.3s ease;
 }
 
 .loading-text {

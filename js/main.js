@@ -74,24 +74,31 @@ function initLoading() {
   const screen = document.getElementById('loading');
   if (!bar || !screen) return;
 
-  let prog = 0;
-  const interval = setInterval(() => {
-    prog += Math.random() * 18 + 4;
-    if (prog >= 100) {
-      prog = 100;
-      bar.style.width = '100%';
-      clearInterval(interval);
-      setTimeout(() => screen.classList.add('hidden'), 400);
-    } else {
-      bar.style.width = prog + '%';
+  const imgs = Array.from(document.images);
+  let done = 0;
+  // いい感じにローディングバーすすめる
+  const step = () => {
+    done++;
+    bar.style.width = (done / imgs.length * 100) + '%';
+  };
+  imgs.forEach(img => {
+    if (img.complete) step();
+    else {
+      img.addEventListener('load', step, { once: true });
+      img.addEventListener('error', step, { once: true });
     }
-  }, 60);
+  });
 
-  window.addEventListener('load', () => {
-    setTimeout(() => {
-      bar.style.width = '100%';
-      setTimeout(() => screen.classList.add('hidden'), 400);
-    }, 300);
+  const loaded = new Promise(resolve => {
+    if (document.readyState === 'complete') resolve();
+    else window.addEventListener('load', resolve, { once: true });
+  });
+  const minWait = new Promise(resolve => setTimeout(resolve, 900));
+  const giveUp = new Promise(resolve => setTimeout(resolve, 6000));
+
+  Promise.race([Promise.all([loaded, minWait]), giveUp]).then(() => {
+    bar.style.width = '100%';
+    setTimeout(() => screen.classList.add('hidden'), 400);
   });
 }
 
